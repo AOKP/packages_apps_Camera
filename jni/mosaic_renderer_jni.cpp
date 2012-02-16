@@ -166,7 +166,7 @@ float g_dIdent3x3[] = {
     0.0, 1.0, 0.0,
     0.0, 0.0, 1.0};
 
-const int GL_TEXTURE_EXTERNAL_OES_ENUM = 0x8D65;
+const int GL_TEXTURE_EXTERNAL_OES_ENUM = 0x0DE1;
 
 static void printGLString(const char *name, GLenum s) {
     const char *v = (const char *) glGetString(s);
@@ -634,6 +634,7 @@ JNIEXPORT void JNICALL Java_com_android_camera_panorama_MosaicRenderer_preproces
 
     gSurfTexRenderer[LR].DrawTexture(g_dAffinetransIdentGL);
     gSurfTexRenderer[HR].DrawTexture(g_dAffinetransIdentGL);
+    glFlush();
 }
 
 #ifndef now_ms
@@ -659,6 +660,7 @@ JNIEXPORT void JNICALL Java_com_android_camera_panorama_MosaicRenderer_transferG
     gYVURenderer[LR].DrawTexture();
     gYVURenderer[HR].DrawTexture();
 
+    glFlush();
     sem_wait(&gPreviewImage_semaphore);
     // Bind to the input LR FBO and read the Low-Res data from there...
     glBindFramebuffer(GL_FRAMEBUFFER, gBufferInputYVU[LR].GetFrameBufferName());
@@ -687,6 +689,7 @@ JNIEXPORT void JNICALL Java_com_android_camera_panorama_MosaicRenderer_transferG
     checkGlError("glReadPixels HR");
 
     sem_post(&gPreviewImage_semaphore);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
 JNIEXPORT void JNICALL Java_com_android_camera_panorama_MosaicRenderer_step(
