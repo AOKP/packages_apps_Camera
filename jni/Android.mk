@@ -10,6 +10,7 @@ LOCAL_C_INCLUDES := \
         $(LOCAL_PATH)/feature_mos/src/mosaic
 
 LOCAL_CFLAGS := -O3 -DNDEBUG
+LOCAL_CFLAGS += -DCPU_COLOR_CONVERT
 
 LOCAL_SRC_FILES := \
         feature_mos_jni.cpp \
@@ -45,5 +46,5 @@ LOCAL_SHARED_LIBRARIES := liblog libnativehelper libGLESv2
 
 LOCAL_MODULE_TAGS := optional
 
-LOCAL_MODULE    := libjni_mosaic
+LOCAL_MODULE    := libjni_mosaic_legacy
 include $(BUILD_SHARED_LIBRARY)

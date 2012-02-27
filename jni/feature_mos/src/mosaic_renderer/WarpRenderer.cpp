@@ -149,9 +149,11 @@ bool WarpRenderer::DrawTexture(GLfloat *affine)
 
         checkGlError("glDrawElements");
 
+        glFlush();
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
         succeeded = true;
     } while (false);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
     return succeeded;
 }
 
