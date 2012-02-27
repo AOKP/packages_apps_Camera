@@ -5,12 +5,12 @@ LOCAL_MODULE_TAGS := optional
 
 LOCAL_SRC_FILES := $(call all-java-files-under, src)
 
-LOCAL_PACKAGE_NAME := Camera
+LOCAL_PACKAGE_NAME := CameraLegacy
 #LOCAL_SDK_VERSION := current
 
-LOCAL_JNI_SHARED_LIBRARIES := libjni_mosaic
+LOCAL_JNI_SHARED_LIBRARIES := libjni_mosaic_legacy
 
-LOCAL_REQUIRED_MODULES := libjni_mosaic
+LOCAL_REQUIRED_MODULES := libjni_mosaic_legacy
 
 LOCAL_PROGUARD_FLAG_FILES := proguard.flags
 
