@@ -178,7 +178,9 @@ const char* SurfaceTextureRenderer::VertexShaderSource() const
 const char* SurfaceTextureRenderer::FragmentShaderSource() const
 {
     static const char gFragmentShader[] =
-        "#extension GL_OES_EGL_image_external : require\n"
+#ifndef MISSING_EGL_EXTERNAL_IMAGE
+	"#extension GL_OES_EGL_image_external : require\n"
+#endif
         "precision mediump float;\n"
         "varying vec2 vTextureNormCoord;\n"
 #ifdef MISSING_EGL_EXTERNAL_IMAGE
