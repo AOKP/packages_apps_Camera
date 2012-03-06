@@ -29,7 +29,11 @@ const GLfloat g_vVertices[] = {
 };
 GLushort g_iIndices2[] = { 0, 1, 2, 3 };
 
+#ifdef MISSING_EGL_EXTERNAL_IMAGE
+const int GL_TEXTURE_EXTERNAL_OES_ENUM = 0x0DE1;
+#else
 const int GL_TEXTURE_EXTERNAL_OES_ENUM = 0x8D65;
+#endif
 
 const int VERTEX_STRIDE = 6 * sizeof(GLfloat);
 
@@ -174,10 +178,16 @@ const char* SurfaceTextureRenderer::VertexShaderSource() const
 const char* SurfaceTextureRenderer::FragmentShaderSource() const
 {
     static const char gFragmentShader[] =
-        "#extension GL_OES_EGL_image_external : require\n"
+#ifndef MISSING_EGL_EXTERNAL_IMAGE
+	"#extension GL_OES_EGL_image_external : require\n"
+#endif
         "precision mediump float;\n"
         "varying vec2 vTextureNormCoord;\n"
-        "uniform samplerExternalOES sTexture;\n"
+#ifdef MISSING_EGL_EXTERNAL_IMAGE
+	"uniform sampler2D sTexture;\n"
+#else
+	"uniform samplerExternalOES sTexture;\n"
+#endif        
         "void main() {\n"
         "  gl_FragColor = texture2D(sTexture, vTextureNormCoord);\n"
         "}\n";

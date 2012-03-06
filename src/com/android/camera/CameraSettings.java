@@ -73,6 +73,7 @@ public class CameraSettings {
 
     // Samsung camcorder mode
     private static boolean mSamsungCamMode;
+    private static boolean mSamsungCamSettings;
 
     public CameraSettings(Activity activity, Parameters parameters,
                           int cameraId, CameraInfo[] cameraInfo) {
@@ -82,6 +83,7 @@ public class CameraSettings {
         mCameraInfo = cameraInfo;
 
         mSamsungCamMode = mContext.getResources().getBoolean(R.bool.needsSamsungCamMode);
+        mSamsungCamSettings = mContext.getResources().getBoolean(R.bool.hasSamsungCamSettings);
 
     }
 
@@ -183,7 +185,7 @@ public class CameraSettings {
             if (mParameters.getMaxNumFocusAreas() == 0) {
                 filterUnsupportedOptions(group,
                         focusMode, mParameters.getSupportedFocusModes());
-            } else {
+            } if(!mSamsungCamSettings) {
                 // Remove the focus mode if we can use tap-to-focus.
                 removePreference(group, focusMode.getKey());
             }

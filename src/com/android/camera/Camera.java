@@ -1882,7 +1882,6 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
         mZoomState = ZOOM_STOPPED;
         setCameraState(IDLE);
         mFocusManager.onPreviewStarted();
-        CameraSettings.setVideoMode(mParameters, false);
         mCameraDevice.setParameters(mParameters);
 
         if (mSnapshotOnIdle) {
@@ -1976,6 +1975,14 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
         if (!original.equals(optimalSize)) {
             mParameters.setPreviewSize(optimalSize.width, optimalSize.height);
 
+            // If preview is running, stop preview and let startPreview call
+            // this function again because we cannot change size on the fly
+            if (mCameraState != PREVIEW_STOPPED) {
+            	stopPreview();
+            	startPreview();
+            	return;
+            }
+            
             // Zoom related settings will be changed for different preview
             // sizes, so set and read the parameters to get lastest values
             mCameraDevice.setParameters(mParameters);
@@ -2068,6 +2075,9 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
         mParameters = mCameraDevice.getParameters();
 
         if ((updateSet & UPDATE_PARAM_INITIALIZE) != 0) {
+        	// Set camera mode
+            CameraSettings.setVideoMode(mParameters, false);
+        	
             updateCameraParametersInitialize();
         }
 
