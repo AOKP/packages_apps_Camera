@@ -44,7 +44,7 @@
     <string name="pref_camera_id_title" msgid="6023059405578511534">"Vybrat fotoaparát"</string>
     <string name="pref_camera_id_entry_back" msgid="5142699735103692485">"Zadní"</string>
     <string name="pref_camera_id_entry_front" msgid="5668958706828733669">"Přední"</string>
-    <string name="pref_camera_recordlocation_title" msgid="371208839215448917">"Úložiště"</string>
+    <string name="pref_camera_recordlocation_title" msgid="371208839215448917">"Poloha"</string>
     <string name="pref_camera_recordlocation_entry_off" msgid="8888142742988946038">"Vypnuto"</string>
     <string name="pref_camera_recordlocation_entry_on" msgid="7954533529969575594">"Zapnout"</string>
     <string name="pref_video_quality_title" msgid="8245379279801096922">"Kvalita videa"</string>
@@ -123,4 +123,6 @@
     <string name="accessibility_decrement" msgid="1411194318538035666">"Snížit %1$s"</string>
     <string name="accessibility_increment" msgid="8447850530444401135">"Zvýšit %1$s"</string>
     <string name="accessibility_switch" msgid="6995966685498958895">"Přepínač %1$s"</string>
+    <!-- AOKP special translations -->
+    <string name="pref_camera_power_shutter_title">Fotit zap. tlačítkem</string>
 </resources>
