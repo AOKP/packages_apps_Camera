@@ -95,14 +95,26 @@
     <!-- In select camera setting, front-facing camera. [CHAR LIMIT=14] -->
     <string name="pref_camera_id_entry_front">Front</string>
 
-    <!-- Settings screen, setting title text -->
-    <string name="pref_camera_recordlocation_title">Store location</string>
+    <!-- More Settings screen, power button title -->
+    <string name="pref_camera_power_shutter_title">Power shutter</string>
+    <string name="pref_camera_power_shutter_default">Off</string>
 
+    <!-- More Settings screen, record location title text -->
+    <string name="pref_camera_recordlocation_title">Store location</string>
     <string name="pref_camera_recordlocation_default" translatable="false">none</string>
 
-    <!-- Settings screen, Record location dialog choices -->
+    <!-- More Settings screen, record location dialog choices -->
     <string name="pref_camera_recordlocation_entry_off">Off</string>
     <string name="pref_camera_recordlocation_entry_on">On</string>
+    
+    <!-- More Settings screen, volume zoom setting title text -->
+    <string name="pref_camera_volumezoom_title">Volume zoom</string>
+    
+    <string name="pref_camera_volumezoom_default" translatable="false">none</string>
+    
+    <!-- More Settings screen, Volume zoom dialog choices -->
+    <string name="pref_camera_volumezoom_entry_off">Off</string>
+    <string name="pref_camera_volumezoom_entry_on">On</string>
 
     <!-- The Video quality settings in preference [CHAR LIMIT=21] -->
     <string name="pref_video_quality_title">Video quality</string>
@@ -133,10 +145,6 @@
 
     <!-- Settings screen, Camcorder setting category title -->
     <string name="pref_camcorder_settings_category">Camcorder settings</string>
-
-    <!-- More Settings screen, power button title -->
-    <string name="pref_camera_power_shutter_title">Power Shutter</string>
-    <string name="pref_camera_power_shutter_default">off</string>
 
     <!-- Settings screen, Picture size title -->
     <string name="pref_camera_picturesize_title">Picture size</string>
