@@ -1697,19 +1697,19 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
             case KeyEvent.KEYCODE_FOCUS:
-                if (mFirstTimeInitialized && event.getRepeatCount() == 0) {
+                if (mFirstTimeInitialized && (event.getRepeatCount() == 0)) {
                     onShutterButtonFocus(true);
                 }
                 return true;
             case KeyEvent.KEYCODE_CAMERA:
-                if (mFirstTimeInitialized && event.getRepeatCount() == 0) {
+                if (mFirstTimeInitialized && (event.getRepeatCount() == 0)) {
                     onShutterButtonClick();
                 }
                 return true;
             case KeyEvent.KEYCODE_DPAD_CENTER:
                 // If we get a dpad center event without any focused view, move
                 // the focus to the shutter button and press it.
-                if (mFirstTimeInitialized && event.getRepeatCount() == 0) {
+                if (mFirstTimeInitialized && (event.getRepeatCount() == 0)) {
                     // Start auto-focus immediately to reduce shutter lag. After
                     // the shutter button gets the focus, onShutterButtonFocus()
                     // will be called again but it is fine.
@@ -1725,36 +1725,26 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
                 }
                 return true;
             case KeyEvent.KEYCODE_POWER:
-                if (mFirstTimeInitialized && event.getRepeatCount() == 0
-                        && powerShutter(mPreferences)) {
+                if (mFirstTimeInitialized && (event.getRepeatCount() == 0) && powerShutter(mPreferences)) {
                     onShutterButtonFocus(true);
                 }
                 return true;
             case KeyEvent.KEYCODE_VOLUME_UP:
-                
             	// If the Volume Up key is pressed, zoom in.
-            	if (mFirstTimeInitialized && event.getRepeatCount() == 0) {
-            		if (mParameters.isZoomSupported()) {
-            		    if (mVolumeZoom) {
-            		        mZoomValue = (((mZoomValue + 10) > mZoomMax) ? mZoomMax : (mZoomValue + 10)); 
-                		    onZoomValueChanged(mZoomValue);
-                		    mZoomControl.setZoomIndex(mZoomValue);
-                		    return true;
-            		    }
-            		}
+            	if (mFirstTimeInitialized && mVolumeZoom && (event.getRepeatCount() == 0)) {
+        		        mZoomValue = (((mZoomValue + 10) > mZoomMax) ? mZoomMax : (mZoomValue + 10)); 
+            		    onZoomValueChanged(mZoomValue);
+            		    mZoomControl.setZoomIndex(mZoomValue);
+            		    return true;
             	}
             	return false;
             case KeyEvent.KEYCODE_VOLUME_DOWN:
             	// If the Volume Down key is pressed, zoom out.
-            	if (mFirstTimeInitialized && event.getRepeatCount() == 0) {
-            		if (mParameters.isZoomSupported()) {
-            		    if (mVolumeZoom) {
-            		        mZoomValue = (((mZoomValue - 10) < 0) ? 0 : (mZoomValue - 10)); 
-                            onZoomValueChanged(mZoomValue);
-                            mZoomControl.setZoomIndex(mZoomValue);
-                            return true;
-            		    }
-            		}
+            	if (mFirstTimeInitialized && mVolumeZoom && (event.getRepeatCount() == 0)) {
+        		        mZoomValue = (((mZoomValue - 10) < 0) ? 0 : (mZoomValue - 10)); 
+                        onZoomValueChanged(mZoomValue);
+                        mZoomControl.setZoomIndex(mZoomValue);
+                        return true;
             	}
             	return false;
         }
