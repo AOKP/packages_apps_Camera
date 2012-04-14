@@ -345,6 +345,7 @@ public class VideoCamera extends ActivityBase
         mNumberOfCameras = CameraHolder.instance().getNumberOfCameras();
         mPrefVideoEffectDefault = getString(R.string.pref_video_effect_default);
         resetEffect();
+        Storage.mStorage = CameraSettings.readStorage(mPreferences);
 
         /*
          * To reduce startup time, we start the preview in another thread.
@@ -454,6 +455,7 @@ public class VideoCamera extends ActivityBase
                     CameraSettings.KEY_RECORD_LOCATION,
                     CameraSettings.KEY_POWER_SHUTTER,
                     CameraSettings.KEY_VOLUME_ZOOM,
+                    CameraSettings.KEY_STORAGE,
                     CameraSettings.KEY_COLOR_EFFECT };
 
         CameraPicker.setImageResourceId(R.drawable.ic_switch_video_facing_holo_light);
@@ -641,7 +643,7 @@ public class VideoCamera extends ActivityBase
     }
 
     private void updateAndShowStorageHint() {
-        mStorageSpace = Storage.getAvailableSpace();
+        mStorageSpace = Storage.getAvailableSpace(Storage.mStorage);
         updateStorageHint(mStorageSpace);
     }
 
@@ -812,7 +814,7 @@ public class VideoCamera extends ActivityBase
         intentFilter.addDataScheme("file");
         mReceiver = new MyBroadcastReceiver();
         registerReceiver(mReceiver, intentFilter);
-        mStorageSpace = Storage.getAvailableSpace();
+        mStorageSpace = Storage.getAvailableSpace(Storage.mStorage);
 
         mHandler.postDelayed(new Runnable() {
             @Override
@@ -1350,7 +1352,7 @@ public class VideoCamera extends ActivityBase
         // Used when emailing.
         String filename = title + convertOutputFormatToFileExt(outputFileFormat);
         String mime = convertOutputFormatToMimeType(outputFileFormat);
-        String path = Storage.DIRECTORY + '/' + filename;
+        String path = Storage.generateDirectory(Storage.mStorage) + '/' + filename;
         String tmpPath = path + ".tmp";
         mCurrentVideoValues = new ContentValues(7);
         mCurrentVideoValues.put(Video.Media.TITLE, title);
@@ -2196,7 +2198,11 @@ public class VideoCamera extends ActivityBase
             mIndicatorControlContainer.dismissSettingPopup();
             CameraSettings.restorePreferences(this, mPreferences,
                     mParameters);
-            mIndicatorControlContainer.reloadPreferences();
+            try {
+                mIndicatorControlContainer.reloadPreferences();
+            } catch(Exception ex) {
+                // Unicorns
+            }
             onSharedPreferenceChanged();
         }
     }
@@ -2223,6 +2229,12 @@ public class VideoCamera extends ActivityBase
 
             // Check if the current effects selection has changed
             if (updateEffectSelection()) return;
+
+            String storage = CameraSettings.readStorage(mPreferences);
+            if (!storage.equals(Storage.mStorage)) {
+                Storage.mStorage = storage;
+                updateAndShowStorageHint();
+            }
 
             readVideoPreferences();
             showTimeLapseUI(mCaptureTimeLapse);
@@ -2514,7 +2526,7 @@ public class VideoCamera extends ActivityBase
         String title = Util.createJpegName(dateTaken);
         int orientation = Exif.getOrientation(data);
         Size s = mParameters.getPictureSize();
-        Uri uri = Storage.addImage(mContentResolver, title, dateTaken, loc, orientation, data,
+        Uri uri = Storage.addImage(mContentResolver, Storage.mStorage, title, dateTaken, loc, orientation, data,
                 s.width, s.height);
         if (uri != null) {
             // Create a thumbnail whose width is equal or bigger than that of the preview.
