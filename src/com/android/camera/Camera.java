@@ -92,6 +92,7 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
                 CameraSettings.KEY_RECORD_LOCATION,
                 CameraSettings.KEY_POWER_SHUTTER,
                 CameraSettings.KEY_VOLUME_ZOOM,
+                CameraSettings.KEY_STORAGE,
                 CameraSettings.KEY_PICTURE_SIZE,
                 CameraSettings.KEY_FOCUS_MODE,
                 CameraSettings.KEY_FOCUS_TIME,
@@ -588,7 +589,7 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
         queue.addIdleHandler(new MessageQueue.IdleHandler() {
             @Override
             public boolean queueIdle() {
-                Storage.ensureOSXCompatible();
+                Storage.ensureOSXCompatible(Storage.mStorage);
                 return false;
             }
         });
@@ -1170,7 +1171,7 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
         private void storeImage(final byte[] data, Uri uri, String title,
                 Location loc, int width, int height, int thumbnailWidth,
                 int orientation) {
-            boolean ok = Storage.updateImage(mContentResolver, uri, title, loc,
+            boolean ok = Storage.updateImage(mContentResolver, uri, Storage.mStorage, title, loc,
                     orientation, data, width, height);
             if (ok) {
                 boolean needThumbnail;
@@ -1282,7 +1283,7 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
         // Runs in namer thread
         private void generateUri() {
             mTitle = Util.createJpegName(mDateTaken);
-            mUri = Storage.newImage(mResolver, mTitle, mDateTaken, mWidth, mHeight);
+            mUri = Storage.newImage(mResolver, Storage.mStorage, mTitle, mDateTaken, mWidth, mHeight);
         }
 
         // Runs in namer thread
@@ -1337,6 +1338,11 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
         mImageNamer.prepareUri(mContentResolver, mCaptureStartTime,
                 size.width, size.height, mJpegRotation);
 
+        if (!mIsImageCaptureIntent) {
+            // Start capture animation
+            mCameraScreenNail.animateCapture(getCameraRotation());
+        }
+
         mFaceDetectionStarted = false;
         setCameraState(SNAPSHOT_IN_PROGRESS);
         return true;
@@ -1375,6 +1381,7 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
         mCameraId = getPreferredCameraId(mPreferences);
         mContentResolver = getContentResolver();
         powerShutter(mPreferences);
+        Storage.mStorage = CameraSettings.readStorage(mPreferences);
         // To reduce startup time, open the camera and start the preview in
         // another thread.
         mCameraStartUpThread = new CameraStartUpThread();
@@ -1389,7 +1396,6 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
 
         mRecordingTimeView = (TextView) findViewById(R.id.recording_time);
         mRecordingTimeRect = (RotateLayout) findViewById(R.id.recording_time_rect);
-        mRotateDialog = new RotateDialogController(this, R.layout.rotate_dialog);
 
         mPreferences.setLocalId(this, mCameraId);
         CameraSettings.upgradeLocalPreferences(mPreferences.getLocal());
@@ -1397,19 +1403,27 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
                 R.id.focus_indicator_rotate_layout);
         // we need to reset exposure for the preview
         resetExposureCompensation();
-        // Starting the preview needs preferences, camera screen nail, and
-        // focus area indicator.
-        mStartPreviewPrerequisiteReady.open();
+        // Make sure all views are disabled before camera is open.
+        enableCameraControls(false);
 
+        Thread startPreviewThread = new Thread(new Runnable() {
+            @Override public void run() {
+                initializeMiscControls();
+                initOnScreenIndicator();
+                // Starting the preview needs preferences, camera screennail, and
+                // focus area indicator.
+                // Open it after initialized
+                startPreview();
+            }
+        });
+
+        startPreviewThread.start();
         initializeControlByIntent();
         mRotateDialog = new RotateDialogController(this, R.layout.rotate_dialog);
         mNumberOfCameras = CameraHolder.instance().getNumberOfCameras();
         mQuickCapture = getIntent().getBooleanExtra(EXTRA_QUICK_CAPTURE, false);
-        initializeMiscControls();
         mLocationManager = new LocationManager(this, this);
-        initOnScreenIndicator();
-        // Make sure all views are disabled before camera is open.
-        enableCameraControls(false);
+
     }
 
     private void overrideCameraSettings(final String flashMode,
@@ -1544,7 +1558,7 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
     }
 
     private void checkStorage() {
-        mStorageSpace = Storage.getAvailableSpace();
+        mStorageSpace = Storage.getAvailableSpace(Storage.mStorage);
         updateStorageHint(mStorageSpace);
     }
 
@@ -2508,6 +2522,12 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
         boolean recordLocation = RecordLocationPreference.get(
                 mPreferences, mContentResolver);
         mLocationManager.recordLocation(recordLocation);
+
+        String storage = CameraSettings.readStorage(mPreferences);
+        if (!storage.equals(Storage.mStorage)) {
+            Storage.mStorage = storage;
+            checkStorage();
+        }
 
         if (mParameters.isZoomSupported())
             mVolumeZoom = VolumeZoomPreference.get(mPreferences, mContentResolver);
