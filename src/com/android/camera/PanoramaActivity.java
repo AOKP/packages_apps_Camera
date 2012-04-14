@@ -96,6 +96,9 @@ public class PanoramaActivity extends ActivityBase implements
     // Speed is in unit of deg/sec
     private static final float PANNING_SPEED_THRESHOLD = 25f;
 
+    private ComboPreferences mPreferences;
+    private String mStorage;
+
     private ContentResolver mContentResolver;
 
     private GLRootView mGLRootView;
@@ -237,6 +240,13 @@ public class PanoramaActivity extends ActivityBase implements
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
+
+        mPreferences = new ComboPreferences(this);
+        CameraSettings.upgradeGlobalPreferences(mPreferences.getGlobal());
+        powerShutter(mPreferences);
+        mPreferences.setLocalId(this, CameraHolder.instance().getBackCameraId());
+        CameraSettings.upgradeLocalPreferences(mPreferences.getLocal());
+        mStorage = CameraSettings.readStorage(mPreferences);
 
         createContentView();
 
@@ -901,10 +911,10 @@ public class PanoramaActivity extends ActivityBase implements
         if (jpegData != null) {
             String filename = PanoUtil.createName(
                     getResources().getString(R.string.pano_file_name_format), mTimeTaken);
-            Uri uri = Storage.addImage(mContentResolver, filename, mTimeTaken, null,
+            Uri uri = Storage.addImage(mContentResolver, mStorage, filename, mTimeTaken, null,
                     orientation, jpegData, width, height);
             if (uri != null) {
-                String filepath = Storage.generateFilepath(filename);
+                String filepath = Storage.generateFilepath(mStorage, filename);
                 try {
                     ExifInterface exif = new ExifInterface(filepath);
 
