@@ -92,6 +92,7 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
                 CameraSettings.KEY_RECORD_LOCATION,
                 CameraSettings.KEY_POWER_SHUTTER,
                 CameraSettings.KEY_VOLUME_ZOOM,
+                CameraSettings.KEY_STORAGE,
                 CameraSettings.KEY_PICTURE_SIZE,
                 CameraSettings.KEY_FOCUS_MODE,
                 CameraSettings.KEY_FOCUS_TIME,
@@ -198,6 +199,8 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
     private ImageNamer mImageNamer;
 
     private MediaActionSound mCameraSound;
+
+    private String mStorage;
 
     private Runnable mDoSnapRunnable = new Runnable() {
         @Override
@@ -588,7 +591,7 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
         queue.addIdleHandler(new MessageQueue.IdleHandler() {
             @Override
             public boolean queueIdle() {
-                Storage.ensureOSXCompatible();
+                Storage.ensureOSXCompatible(mStorage);
                 return false;
             }
         });
@@ -1170,7 +1173,7 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
         private void storeImage(final byte[] data, Uri uri, String title,
                 Location loc, int width, int height, int thumbnailWidth,
                 int orientation) {
-            boolean ok = Storage.updateImage(mContentResolver, uri, title, loc,
+            boolean ok = Storage.updateImage(mContentResolver, uri, mStorage, title, loc,
                     orientation, data, width, height);
             if (ok) {
                 boolean needThumbnail;
@@ -1208,6 +1211,7 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
         private boolean mStop;
         private Uri mUri;
         private String mTitle;
+        private String mStorage;
 
         // Runs in main thread
         public ImageNamer() {
@@ -1282,7 +1286,7 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
         // Runs in namer thread
         private void generateUri() {
             mTitle = Util.createJpegName(mDateTaken);
-            mUri = Storage.newImage(mResolver, mTitle, mDateTaken, mWidth, mHeight);
+            mUri = Storage.newImage(mResolver, mStorage, mTitle, mDateTaken, mWidth, mHeight);
         }
 
         // Runs in namer thread
@@ -1374,6 +1378,7 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
         CameraSettings.upgradeGlobalPreferences(mPreferences.getGlobal());
         mCameraId = getPreferredCameraId(mPreferences);
         mContentResolver = getContentResolver();
+        mStorage = CameraSettings.readStorage(mPreferences);
         powerShutter(mPreferences);
         // To reduce startup time, open the camera and start the preview in
         // another thread.
@@ -1544,7 +1549,7 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
     }
 
     private void checkStorage() {
-        mStorageSpace = Storage.getAvailableSpace();
+        mStorageSpace = Storage.getAvailableSpace(mStorage);
         updateStorageHint(mStorageSpace);
     }
 
@@ -2504,6 +2509,12 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
         boolean recordLocation = RecordLocationPreference.get(
                 mPreferences, mContentResolver);
         mLocationManager.recordLocation(recordLocation);
+
+        String storage = CameraSettings.readStorage(mPreferences);
+        if (!storage.equals(mStorage)) {
+            mStorage = storage;
+            checkStorage();
+        }
 
         if (mParameters.isZoomSupported())
             mVolumeZoom = VolumeZoomPreference.get(mPreferences, mContentResolver);
