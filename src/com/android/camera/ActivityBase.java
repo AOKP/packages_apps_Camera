@@ -299,6 +299,7 @@ abstract public class ActivityBase extends AbstractGalleryActivity
 
     private class LoadThumbnailTask extends AsyncTask<Void, Void, Thumbnail> {
         private boolean mLookAtCache;
+        private String bucketId;
 
         public LoadThumbnailTask(boolean lookAtCache) {
             mLookAtCache = lookAtCache;
@@ -319,7 +320,7 @@ abstract public class ActivityBase extends AbstractGalleryActivity
                 Thumbnail result[] = new Thumbnail[1];
                 // Load the thumbnail from the media provider.
                 int code = Thumbnail.getLastThumbnailFromContentResolver(
-                        resolver, result);
+                        resolver, bucketId, result);
                 switch (code) {
                     case Thumbnail.THUMBNAIL_FOUND:
                         return result[0];
