@@ -92,6 +92,7 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
                 CameraSettings.KEY_RECORD_LOCATION,
                 CameraSettings.KEY_POWER_SHUTTER,
                 CameraSettings.KEY_VOLUME_ZOOM,
+                CameraSettings.KEY_STORAGE,
                 CameraSettings.KEY_PICTURE_SIZE,
                 CameraSettings.KEY_FOCUS_MODE,
                 CameraSettings.KEY_FOCUS_TIME,
@@ -588,7 +589,7 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
         queue.addIdleHandler(new MessageQueue.IdleHandler() {
             @Override
             public boolean queueIdle() {
-                Storage.ensureOSXCompatible();
+                Storage.ensureOSXCompatible(Storage.mStorage);
                 return false;
             }
         });
@@ -1170,7 +1171,7 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
         private void storeImage(final byte[] data, Uri uri, String title,
                 Location loc, int width, int height, int thumbnailWidth,
                 int orientation) {
-            boolean ok = Storage.updateImage(mContentResolver, uri, title, loc,
+            boolean ok = Storage.updateImage(mContentResolver, uri, Storage.mStorage, title, loc,
                     orientation, data, width, height);
             if (ok) {
                 boolean needThumbnail;
@@ -1282,7 +1283,7 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
         // Runs in namer thread
         private void generateUri() {
             mTitle = Util.createJpegName(mDateTaken);
-            mUri = Storage.newImage(mResolver, mTitle, mDateTaken, mWidth, mHeight);
+            mUri = Storage.newImage(mResolver, Storage.mStorage, mTitle, mDateTaken, mWidth, mHeight);
         }
 
         // Runs in namer thread
@@ -1410,6 +1411,7 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
         initOnScreenIndicator();
         // Make sure all views are disabled before camera is open.
         enableCameraControls(false);
+        Storage.mStorage = CameraSettings.readStorage(mPreferences);
     }
 
     private void overrideCameraSettings(final String flashMode,
@@ -1544,7 +1546,7 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
     }
 
     private void checkStorage() {
-        mStorageSpace = Storage.getAvailableSpace();
+        mStorageSpace = Storage.getAvailableSpace(Storage.mStorage);
         updateStorageHint(mStorageSpace);
     }
 
@@ -2508,6 +2510,12 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
         boolean recordLocation = RecordLocationPreference.get(
                 mPreferences, mContentResolver);
         mLocationManager.recordLocation(recordLocation);
+
+        String storage = CameraSettings.readStorage(mPreferences);
+        if (!storage.equals(Storage.mStorage)) {
+            Storage.mStorage = storage;
+            checkStorage();
+        }
 
         if (mParameters.isZoomSupported())
             mVolumeZoom = VolumeZoomPreference.get(mPreferences, mContentResolver);
