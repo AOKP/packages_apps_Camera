@@ -125,4 +125,7 @@
     <string name="accessibility_switch" msgid="6995966685498958895">"Přepínač %1$s"</string>
     <!-- AOKP special translations -->
     <string name="pref_camera_power_shutter_title">Fotit zap. tlačítkem</string>
+    <string name="pref_camera_volumezoom_title">Zoomovat tl. hlasitosti</string>
+    <string name="pref_camera_timer_title">Režim časovače</string>
+    <string name="pref_camera_timer_entry_0">vypnuto</string>
 </resources>
