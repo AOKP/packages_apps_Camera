@@ -1920,6 +1920,8 @@ public class VideoCamera extends ActivityBase
     }
 
     private void setCameraHardwareParameters() {
+        CameraSettings.dumpParameters(mParameters);
+
         mCameraDevice.setParameters(mParameters);
     }
 
@@ -2003,6 +2005,7 @@ public class VideoCamera extends ActivityBase
                 CameraProfile.QUALITY_HIGH);
         mParameters.setJpegQuality(jpegQuality);
 
+        CameraSettings.dumpParameters(mParameters);
         mCameraDevice.setParameters(mParameters);
         // Keep preview size up to date.
         mParameters = mCameraDevice.getParameters();
@@ -2445,6 +2448,7 @@ public class VideoCamera extends ActivityBase
         Util.setRotationParameter(mParameters, mCameraId, mOrientation);
         Location loc = mLocationManager.getCurrentLocation();
         Util.setGpsParameters(mParameters, loc);
+        CameraSettings.dumpParameters(mParameters);
         mCameraDevice.setParameters(mParameters);
 
         Log.v(TAG, "Video snapshot start");
