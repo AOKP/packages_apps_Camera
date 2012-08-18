@@ -49,11 +49,18 @@
     <string name="pref_video_time_lapse_frame_interval_title" msgid="5262531404348504642">"延时间隔"</string>
     <string name="pref_camera_settings_category" msgid="2576236450859613120">"相机设置"</string>
     <string name="pref_camcorder_settings_category" msgid="460313486231965141">"摄像机设置"</string>
+    <string name="pref_camera_power_shutter_title">电源键快门</string>
+    <string name="pref_camera_power_shutter_default">关闭</string>
     <string name="pref_camera_picturesize_title" msgid="4333724936665883006">"照片大小"</string>
     <string name="pref_camera_focusmode_title" msgid="2877248921829329127">"对焦方式"</string>
     <string name="pref_camera_focusmode_entry_auto" msgid="7374820710300362457">"自动"</string>
     <string name="pref_camera_focusmode_entry_infinity" msgid="3413922419264967552">"无限远"</string>
     <string name="pref_camera_focusmode_entry_macro" msgid="4424489110551866161">"微距"</string>
+    <string name="pref_camera_focusmode_entry_fixed">定焦</string>
+    <string name="pref_camera_focusmode_entry_facedetect">面部检测</string>
+    <string name="pref_camera_focusmode_entry_continuouspicture">连拍</string>
+    <string name="pref_camera_iso_entry_auto">自动</string>
+    <string name="pref_camera_iso_entry_isodeblur">自动 (HJR)</string>
     <string name="pref_camera_flashmode_title" msgid="2287362477238791017">"闪光模式"</string>
     <string name="pref_camera_flashmode_entry_auto" msgid="7288383434237457709">"自动"</string>
     <string name="pref_camera_flashmode_entry_on" msgid="5330043918845197616">"开"</string>
@@ -70,6 +77,10 @@
     <string name="pref_camera_scenemode_entry_night" msgid="7606898503102476329">"夜景"</string>
     <string name="pref_camera_scenemode_entry_sunset" msgid="181661154611507212">"日落"</string>
     <string name="pref_camera_scenemode_entry_party" msgid="907053529286788253">"派对"</string>
+    <string name="pref_camera_scenemode_entry_backlight">逆光</string>
+    <string name="pref_camera_scenemode_entry_duskdawn">微光</string>
+    <string name="pref_camera_scenemode_entry_fallcolor">滤色</string>
+    <string name="pref_camera_scenemode_entry_text">文字</string>
     <string name="not_selectable_in_scene_mode" msgid="2970291701448555126">"无法在取景模式下选择。"</string>
     <string name="pref_restore_title" msgid="6479274979730178961">"相机设置"</string>
     <string name="pref_restore_detail" msgid="5732490002291044791">"还原默认设置"</string>
@@ -121,4 +132,46 @@
     <string name="accessibility_switch_to_camera" msgid="5951340774212969461">"切换到拍照模式"</string>
     <string name="accessibility_switch_to_video" msgid="4991396355234561505">"切换到视频模式"</string>
     <string name="accessibility_switch_to_panorama" msgid="604756878371875836">"切换到全景模式"</string>
+    <string name="pref_camera_autoexposure_title">自动曝光模式</string>
+    <string name="pref_camera_autoexposure_entry_frameaverage">画面平均</string>
+    <string name="pref_camera_autoexposure_entry_centerweighted">中央重点</string>
+    <string name="pref_camera_autoexposure_entry_spotmetering">点测光</string>
+    <string name="pref_camera_autoexposure_entry_matrix">矩阵</string>
+    <string name="pref_camera_redeyereduction_title">防红眼</string>
+    <string name="pref_camera_redeyereduction_entry_enable">启用</string>
+    <string name="pref_camera_redeyereduction_entry_disable">禁用</string>
+    <string name="pref_camera_antibanding_title">抗条纹</string>
+    <string name="pref_camera_antibanding_entry_0">关闭</string>
+    <string name="pref_camera_antibanding_entry_1">50 Hz</string>
+    <string name="pref_camera_antibanding_entry_2">60 Hz</string>
+    <string name="pref_camera_antibanding_entry_3">自动</string>
+    <string name="pref_camera_coloreffect_title">色彩效果</string>
+    <string name="pref_camera_coloreffect_entry_none">无</string>
+    <string name="pref_camera_coloreffect_entry_mono">黑白</string>
+    <string name="pref_camera_coloreffect_entry_sepia">棕褐色</string>
+    <string name="pref_camera_coloreffect_entry_negative">底片</string>
+    <string name="pref_camera_coloreffect_entry_solarize">过曝</string>
+    <string name="pref_camera_coloreffect_entry_posterize">色调分色</string>
+    <string name="pref_camera_coloreffect_entry_aqua">水下</string>
+    <string name="pref_camera_coloreffect_entry_emboss">浮雕</string>
+    <string name="pref_camera_coloreffect_entry_sketch">素描</string>
+    <string name="pref_camera_coloreffect_entry_neon">霓虹</string>
+    <string name="pref_camera_coloreffect_entry_pastel">柔和</string>
+    <string name="pref_camera_coloreffect_entry_mosaic">马赛克</string>
+    <string name="pref_camera_coloreffect_entry_redtint">红色调</string>
+    <string name="pref_camera_coloreffect_entry_bluetint">蓝色调</string>
+    <string name="pref_camera_coloreffect_entry_greentint">绿色调</string>
+    <string name="pref_camera_scenemode_entry_asd">ASD</string>
+    <string name="pref_camera_scenemode_entry_portrait">人像</string>
+    <string name="pref_camera_scenemode_entry_landscape">风景</string>
+    <string name="pref_camera_scenemode_entry_night_portrait">夜间人像</string>
+    <string name="pref_camera_scenemode_entry_theatre">剧场</string>
+    <string name="pref_camera_scenemode_entry_beach">海滩</string>
+    <string name="pref_camera_scenemode_entry_snow">雪景</string>
+    <string name="pref_camera_scenemode_entry_steadyphoto">稳定图像</string>
+    <string name="pref_camera_scenemode_entry_fireworks">烟火</string>
+    <string name="pref_camera_scenemode_entry_sports">运动</string>
+    <string name="pref_camera_scenemode_entry_candlelight">微光</string>
+    <string name="pref_camera_scenemode_entry_flowers">花朵</string>
+    <string name="pref_camera_scenemode_entry_ar">AR</string>
 </resources>
