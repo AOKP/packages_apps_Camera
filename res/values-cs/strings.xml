@@ -121,4 +121,13 @@
     <string name="accessibility_switch_to_camera" msgid="5951340774212969461">"Přepnout na fotoaparát"</string>
     <string name="accessibility_switch_to_video" msgid="4991396355234561505">"Přepnout na video"</string>
     <string name="accessibility_switch_to_panorama" msgid="604756878371875836">"Přepnout do panoramatického režimu"</string>
+
+    <string name="pref_camera_focus_title">Doba zaostření dotykem</string>
+    <string name="pref_camera_focus_summary">Zvolit délku trvání zaostření dotykem</string>
+    <string name="pref_camera_focus_entry_10">10s</string>
+    <string name="pref_camera_focus_entry_15">15s</string>
+    <string name="pref_camera_focus_entry_20">20s</string>
+    <string name="pref_camera_focus_entry_30">30s</string>
+    <string name="pref_camera_focus_entry_40">40s</string>
+    <string name="pref_camera_focus_entry_infinit">nekonečno</string>
 </resources>
