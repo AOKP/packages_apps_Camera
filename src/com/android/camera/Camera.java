@@ -92,6 +92,7 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
     private final String[] OTHER_SETTING_KEYS = {
                 CameraSettings.KEY_RECORD_LOCATION,
                 CameraSettings.KEY_POWER_SHUTTER,
+                CameraSettings.KEY_PINCH_ZOOM,
                 CameraSettings.KEY_PICTURE_SIZE,
                 CameraSettings.KEY_FOCUS_MODE,
                 CameraSettings.KEY_FOCUS_TIME,
@@ -1922,7 +1923,7 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
                     mHandler.sendEmptyMessageDelayed(FINISH_PINCH_TO_ZOOM, 250);
                     break;
                 case MotionEvent.ACTION_MOVE:
-                    if (mStartZoom) {
+                    if (mStartZoom && pinchZoom(mPreferences)) {
                         float newDistance = getDistance(e);
 
                         // Perform zoom only when preview is started and snapshot is not in
@@ -1950,7 +1951,7 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
         }
 
         // Do not trigger a focus during a pinch-to-zoom operation
-        if (mStartZoom) {
+        if (mStartZoom && pinchZoom(mPreferences)) {
             return false;
         }
 

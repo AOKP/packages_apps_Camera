@@ -57,6 +57,7 @@ public class CameraSettings {
     public static final String KEY_CAMERA_FIRST_USE_HINT_SHOWN = "pref_camera_first_use_hint_shown_key";
     public static final String KEY_VIDEO_FIRST_USE_HINT_SHOWN = "pref_video_first_use_hint_shown_key";
     public static final String KEY_POWER_SHUTTER = "pref_power_shutter";
+    public static final String KEY_PINCH_ZOOM = "pref_pinch_zoom";
 
     public static final String KEY_POWER_MODE = "pref_camera_powermode_key";
     public static final String KEY_PICTURE_FORMAT = "pref_camera_pictureformat_key";
