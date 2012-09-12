@@ -92,6 +92,7 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
     private final String[] OTHER_SETTING_KEYS = {
                 CameraSettings.KEY_RECORD_LOCATION,
                 CameraSettings.KEY_POWER_SHUTTER,
+                CameraSettings.KEY_VOLUME_ZOOM,
                 CameraSettings.KEY_PICTURE_SIZE,
                 CameraSettings.KEY_FOCUS_MODE,
                 CameraSettings.KEY_FOCUS_TIME,
@@ -141,6 +142,7 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
     private int mZoomValue;  // The current zoom value.
     private int mZoomMax;
     private ZoomControl mZoomControl;
+    private boolean mVolumeZoom = false;    // Volume zoom.
 
     private boolean mStartZoom = false;
     private float oldDistance = 1f;
@@ -629,12 +631,7 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
         @Override
         public void onZoomValueChanged(int index) {
             // Not useful to change zoom value when the activity is paused.
-            if (mPaused) return;
-            mZoomValue = index;
-
-            // Set zoom parameters asynchronously
-            mParameters.setZoom(mZoomValue);
-            mCameraDevice.setParametersAsync(mParameters);
+            onZoomValueChanged(index);
         }
     }
 
@@ -646,6 +643,19 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
         mZoomControl.setZoomMax(mZoomMax);
         mZoomControl.setZoomIndex(mParameters.getZoom());
         mZoomControl.setOnZoomChangeListener(new ZoomChangeListener());
+
+        // Initialize volume zoom.
+        mVolumeZoom = VolumeZoomPreference.get(mPreferences, mContentResolver);
+    }
+
+    private void onZoomValueChanged(int index) {
+        // Not useful to change zoom value when the activity is paused.
+        if (mPaused) return;
+        mZoomValue = index;
+
+        // Set zoom parameters asynchronously
+        mParameters.setZoom(mZoomValue);
+        mCameraDevice.setParametersAsync(mParameters);
     }
 
     @Override
@@ -1991,19 +2001,19 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         switch (keyCode) {
             case KeyEvent.KEYCODE_FOCUS:
-                if (mFirstTimeInitialized && event.getRepeatCount() == 0) {
+                if (mFirstTimeInitialized && (event.getRepeatCount() == 0)) {
                     onShutterButtonFocus(true);
                 }
                 return true;
             case KeyEvent.KEYCODE_CAMERA:
-                if (mFirstTimeInitialized && event.getRepeatCount() == 0) {
+                if (mFirstTimeInitialized && (event.getRepeatCount() == 0)) {
                     onShutterButtonClick();
                 }
                 return true;
             case KeyEvent.KEYCODE_DPAD_CENTER:
                 // If we get a dpad center event without any focused view, move
                 // the focus to the shutter button and press it.
-                if (mFirstTimeInitialized && event.getRepeatCount() == 0) {
+                if (mFirstTimeInitialized && (event.getRepeatCount() == 0)) {
                     // Start auto-focus immediately to reduce shutter lag. After
                     // the shutter button gets the focus, onShutterButtonFocus()
                     // will be called again but it is fine.
@@ -2018,10 +2028,29 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
                 }
                 return true;
             case KeyEvent.KEYCODE_POWER:
-                if (mFirstTimeInitialized && event.getRepeatCount() == 0 && powerShutter(mPreferences)) {
+                if (mFirstTimeInitialized && (event.getRepeatCount() == 0) && powerShutter(mPreferences)) {
                     onShutterButtonFocus(true);
                 }
                 return true;
+            case KeyEvent.KEYCODE_VOLUME_UP:
+
+                // If the Volume Up key is pressed, zoom in.
+                if (mFirstTimeInitialized && mVolumeZoom && (event.getRepeatCount() == 0)) {
+                    mZoomValue = (((mZoomValue + 10) > mZoomMax) ? mZoomMax : (mZoomValue + 10));
+                    onZoomValueChanged(mZoomValue);
+                    mZoomControl.setZoomIndex(mZoomValue);
+                    return true;
+                }
+                return false;
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
+                // If the Volume Down key is pressed, zoom out.
+                if (mFirstTimeInitialized && mVolumeZoom && (event.getRepeatCount() == 0)) {
+                    mZoomValue = (((mZoomValue - 10) < 0) ? 0 : (mZoomValue - 10));
+                    onZoomValueChanged(mZoomValue);
+                    mZoomControl.setZoomIndex(mZoomValue);
+                    return true;
+                }
+                return false;
         }
 
         return super.onKeyDown(keyCode, event);
@@ -2040,6 +2069,11 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
                     onShutterButtonClick();
                 }
                 return true;
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
+            case KeyEvent.KEYCODE_VOLUME_UP:
+                if (mFirstTimeInitialized && mVolumeZoom) {
+                    return true;
+                }
         }
         return super.onKeyUp(keyCode, event);
     }
@@ -2472,6 +2506,9 @@ public class Camera extends ActivityBase implements FocusManager.Listener,
         boolean recordLocation = RecordLocationPreference.get(
                 mPreferences, mContentResolver);
         mLocationManager.recordLocation(recordLocation);
+
+        if (mParameters.isZoomSupported())
+            mVolumeZoom = VolumeZoomPreference.get(mPreferences, mContentResolver);
 
         setCameraParametersWhenIdle(UPDATE_PARAM_PREFERENCE);
         setPreviewFrameLayoutAspectRatio();
