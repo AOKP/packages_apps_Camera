@@ -57,6 +57,7 @@ public class CameraSettings {
     public static final String KEY_CAMERA_FIRST_USE_HINT_SHOWN = "pref_camera_first_use_hint_shown_key";
     public static final String KEY_VIDEO_FIRST_USE_HINT_SHOWN = "pref_video_first_use_hint_shown_key";
     public static final String KEY_POWER_SHUTTER = "pref_power_shutter";
+    public static final String KEY_VOLUME_ZOOM = VolumeZoomPreference.KEY;
 
     public static final String KEY_POWER_MODE = "pref_camera_powermode_key";
     public static final String KEY_PICTURE_FORMAT = "pref_camera_pictureformat_key";
@@ -393,6 +394,11 @@ public class CameraSettings {
                     pref.getBoolean(KEY_RECORD_LOCATION, false)
                     ? CameraSettings.VALUE_ON
                     : RecordLocationPreference.VALUE_NONE);
+
+            editor.putString(KEY_VOLUME_ZOOM,
+                    pref.getBoolean(KEY_VOLUME_ZOOM, false)
+                    ? CameraSettings.VALUE_ON
+                    : VolumeZoomPreference.VALUE_NONE);
             version = 3;
         }
         if (version == 3) {
