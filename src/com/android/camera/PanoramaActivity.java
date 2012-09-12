@@ -63,6 +63,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.TimeZone;
+import android.view.KeyEvent;
 
 /**
  * Activity to handle panorama capturing.
@@ -356,9 +357,9 @@ public class PanoramaActivity extends ActivityBase implements
 
     private void setupCamera() throws CameraHardwareException, CameraDisabledException {
         openCamera();
-        Parameters parameters = mCameraDevice.getParameters();
-        setupCaptureParams(parameters);
-        configureCamera(parameters);
+        mParameters = mCameraDevice.getParameters();
+        setupCaptureParams(mParameters);
+        configureCamera(mParameters);
     }
 
     private void releaseCamera() {
@@ -1226,5 +1227,62 @@ public class PanoramaActivity extends ActivityBase implements
             }
             resetToPreview();
         }
+    }
+
+    private void onZoomValueChanged(int index) {
+        // Not useful to change zoom value when the activity is paused.
+        if (mPaused) return;
+
+        // Set zoom parameters asynchronously
+        mParameters.setZoom(index);
+        mCameraDevice.setParametersAsync(mParameters);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_VOLUME_UP:
+                if (event.getRepeatCount() == 0
+                        && mParameters.isZoomSupported()
+                        && !(mPaused || mThreadRunning || mCameraTexture == null || mCaptureState == CAPTURE_STATE_MOSAIC)) {
+                    int index = mParameters.getZoom() + 5;
+                    if (index <= mParameters.getMaxZoom()) {
+                        onZoomValueChanged(index);
+                    }
+
+                }
+                return true;
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
+                if (event.getRepeatCount() == 0
+                        && mParameters.isZoomSupported()
+                        && !(mPaused || mThreadRunning || mCameraTexture == null || mCaptureState == CAPTURE_STATE_MOSAIC)) {
+                    int index = mParameters.getZoom() - 5;
+                    if (index >= 0) {
+                        onZoomValueChanged(index);
+                    }
+                }
+                return true;
+        }
+
+        return super.onKeyDown(keyCode, event);
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_VOLUME_UP:
+                if (event.getRepeatCount() == 0 && mParameters.isZoomSupported()
+                        && !(mPaused || mThreadRunning || mCameraTexture == null)) {
+                    return true;
+                }
+                break;
+            case KeyEvent.KEYCODE_VOLUME_DOWN:
+                if (event.getRepeatCount() == 0 && mParameters.isZoomSupported()
+                        && !(mPaused || mThreadRunning || mCameraTexture == null)) {
+                    return true;
+                }
+                break;
+        }
+        return super.onKeyUp(keyCode, event);
     }
 }

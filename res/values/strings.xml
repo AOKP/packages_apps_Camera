@@ -94,12 +94,20 @@
 
     <!-- Settings screen, setting title text -->
     <string name="pref_camera_recordlocation_title">Store location</string>
-
     <string name="pref_camera_recordlocation_default" translatable="false">none</string>
 
     <!-- Settings screen, Record location dialog choices -->
     <string name="pref_camera_recordlocation_entry_off">Off</string>
     <string name="pref_camera_recordlocation_entry_on">On</string>
+
+    <!-- More Settings screen, volume zoom setting title text -->
+    <string name="pref_camera_volumezoom_title">Volume zoom</string>
+
+    <string name="pref_camera_volumezoom_default" translatable="false">none</string>
+
+    <!-- More Settings screen, Volume zoom dialog choices -->
+    <string name="pref_camera_volumezoom_entry_off">Off</string>
+    <string name="pref_camera_volumezoom_entry_on">On</string>
 
     <!-- The Video quality settings in preference [CHAR LIMIT=21] -->
     <string name="pref_video_quality_title">Video quality</string>
