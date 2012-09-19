@@ -42,7 +42,7 @@
     <string name="pref_camera_id_title" msgid="4040791582294635851">"Zvolit fotoaparát"</string>
     <string name="pref_camera_id_entry_back" msgid="5142699735103692485">"Zadní"</string>
     <string name="pref_camera_id_entry_front" msgid="5668958706828733669">"Přední"</string>
-    <string name="pref_camera_recordlocation_title" msgid="371208839215448917">"Úložiště"</string>
+    <string name="pref_camera_recordlocation_title" msgid="371208839215448917">"Poloha"</string>
     <string name="pref_camera_recordlocation_entry_off" msgid="8888142742988946038">"Vypnuto"</string>
     <string name="pref_camera_recordlocation_entry_on" msgid="7954533529969575594">"Zapnout"</string>
     <string name="pref_video_quality_title" msgid="8245379279801096922">"Kvalita videa"</string>
@@ -121,6 +121,27 @@
     <string name="accessibility_switch_to_camera" msgid="5951340774212969461">"Přepnout na fotoaparát"</string>
     <string name="accessibility_switch_to_video" msgid="4991396355234561505">"Přepnout na video"</string>
     <string name="accessibility_switch_to_panorama" msgid="604756878371875836">"Přepnout do panoramatického režimu"</string>
+
+    <string name="pref_camera_power_shutter_title">Fotit tl. napájení</string>
+    <string name="pref_camera_volumezoom_title">Přiblízení tl. hlasitosti</string>
+    <string name="pref_camera_focusmode_entry_continuouspicture">Continuous Picture</string>
+    <string name="pref_camera_burst_title">Burst režim</string>
+    <string name="pref_camera_burst_entry_off">Vypnuto</string>
+    <string name="pref_camera_burst_entry_5">5 snímků</string>
+    <string name="pref_camera_burst_entry_10">10 snímků</string>
+    <string name="pref_camera_burst_entry_15">15 snímků</string>
+    <string name="pref_camera_burst_entry_20">20 snímků</string>
+    <string name="pref_camera_jpeg_title">Kvalita JPEG</string>
+    <string name="pref_camera_jpeg_entry_super">Nejvyšší</string>
+    <string name="pref_camera_jpeg_entry_high">Vysoká</string>
+    <string name="pref_camera_jpeg_entry_medium">Střední</string>
+    <string name="pref_camera_jpeg_entry_low">Nízká</string>
+    <string name="pref_camera_coloreffect_title">Barevný efekt</string>
+    <string name="pref_camera_coloreffect_entry_none">Žádný</string>
+    <string name="pref_camera_antibanding_title">Potlačení pruhů</string>
+    <string name="pref_camera_antibanding_entry_0">Vypnuto</string>
+    <string name="pref_camera_timer_title">Režim časovače</string>
+    <string name="pref_camera_timer_entry_0">Vypnuto</string>
 
     <string name="pref_camera_focus_title">Doba zaostření dotykem</string>
     <string name="pref_camera_focus_summary">Zvolit délku trvání zaostření dotykem</string>
