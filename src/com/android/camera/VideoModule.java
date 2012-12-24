@@ -2506,7 +2506,7 @@ public class VideoModule implements CameraModule,
             return;
         }
 
-        if (!mPaused || mSnapshotInProgress || effectsActive()
+        if (mPaused || mSnapshotInProgress || effectsActive()
                 || !Util.isVideoSnapshotSupported(mParameters)) {
             return;
         }
