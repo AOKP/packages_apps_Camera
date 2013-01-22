@@ -177,4 +177,63 @@
     <string name="remember_location_prompt" msgid="724592331305808098">"画像や動画に撮影場所のタグを付けることができます。"\n\n"他のアプリから、保存された画像とともに撮影場所の情報にもアクセスできるようになります。"</string>
     <string name="remember_location_no" msgid="7541394381714894896">"いいえ"</string>
     <string name="remember_location_yes" msgid="862884269285964180">"はい"</string>
+
+     <!-- More Settings screen, power button title -->
+     <string name="pref_camera_power_shutter_title">電源シャッター</string>
+     <string name="pref_camera_power_shutter_default">オフ</string>
+
+     <!-- Settings screen, ISO -->
+     <string name="pref_camera_iso_title">ISO</string>
+
+     <!-- Settings screen, ISO dialog radio button choices -->
+     <string name="pref_camera_iso_entry_auto">自動</string>
+     <string name="pref_camera_iso_entry_isodeblur">自動 (HJR)</string>
+     <string name="pref_camera_iso_entry_iso1600">1600</string>
+     <string name="pref_camera_iso_entry_iso1200">1200</string>
+     <string name="pref_camera_iso_entry_iso1000">1000</string>
+     <string name="pref_camera_iso_entry_iso800">800</string>
+     <string name="pref_camera_iso_entry_iso400">400</string>
+     <string name="pref_camera_iso_entry_iso200">200</string>
+     <string name="pref_camera_iso_entry_iso100">100</string>
+     <string name="pref_camera_iso_entry_iso50">50</string>
+
+    <!-- Settings screen, JPEG Quality -->
+    <string name="pref_camera_jpeg_title">JPEG品質</string>
+
+    <!-- Settings screen, JPEG dialog radio button choices -->
+    <string name="pref_camera_jpeg_entry_super">超高画質</string>
+    <string name="pref_camera_jpeg_entry_high">高画質</string>
+    <string name="pref_camera_jpeg_entry_medium">標準</string>
+    <string name="pref_camera_jpeg_entry_low">低画質</string>
+
+    <!-- Settings screen, Select Color effect title -->
+    <string name="pref_camera_coloreffect_title">カラーエフェクト</string>
+
+    <!-- Settings screen, Color effect dialog radio button choices -->
+    <string name="pref_camera_coloreffect_entry_none">無し</string>
+    <string name="pref_camera_coloreffect_entry_mono">モノクロ</string>
+    <string name="pref_camera_coloreffect_entry_sepia">セピア</string>
+    <string name="pref_camera_coloreffect_entry_negative">反転</string>
+    <string name="pref_camera_coloreffect_entry_solarize">ソラリゼーション</string>
+    <string name="pref_camera_coloreffect_entry_posterize">ポスター</string>
+    <string name="pref_camera_coloreffect_entry_aqua">アクア</string>
+    <string name="pref_camera_coloreffect_entry_emboss">エンボス</string>
+    <string name="pref_camera_coloreffect_entry_sketch">スケッチ</string>
+    <string name="pref_camera_coloreffect_entry_neon">ネオン</string>
+    <string name="pref_camera_coloreffect_entry_pastel">パステル</string>
+    <string name="pref_camera_coloreffect_entry_mosaic">モザイク</string>
+    <string name="pref_camera_coloreffect_entry_redtint">色合い(赤)</string>
+    <string name="pref_camera_coloreffect_entry_bluetint">色合い(青)</string>
+    <string name="pref_camera_coloreffect_entry_greentint">色合い(緑)</string>
+
+    <!-- Settings screen, Burst mode title -->
+    <string name="pref_camera_burst_title">連続撮影</string>
+
+    <!-- Settings screen, Burst mode entries -->
+    <string name="pref_camera_burst_entry_off">オフ</string>
+    <string name="pref_camera_burst_entry_5">5枚</string>
+    <string name="pref_camera_burst_entry_10">10枚</string>
+    <string name="pref_camera_burst_entry_15">15枚</string>
+    <string name="pref_camera_burst_entry_20">20枚</string>
+
 </resources>
