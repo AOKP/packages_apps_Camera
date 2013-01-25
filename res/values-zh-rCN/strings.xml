@@ -177,4 +177,49 @@
     <string name="remember_location_prompt" msgid="724592331305808098">"为您的照片和视频标明拍摄地点。"\n\n"其他应用在查看您保存的图片时将可以访问这些信息。"</string>
     <string name="remember_location_no" msgid="7541394381714894896">"不用了"</string>
     <string name="remember_location_yes" msgid="862884269285964180">"是"</string>
+
+    <string name="pref_camera_power_shutter_title">电源键快门</string>
+    <string name="pref_camera_power_shutter_default">关闭</string>
+
+    <string name="pref_camera_iso_entry_auto">自动</string>
+    <string name="pref_camera_iso_entry_isodeblur">自动 (HJR)</string>
+
+    <!-- Settings screen, JPEG Quality -->
+    <string name="pref_camera_jpeg_title">JPEG 质量</string>
+
+    <!-- Settings screen, JPEG dialog radio button choices -->
+    <string name="pref_camera_jpeg_entry_super">超高</string>
+    <string name="pref_camera_jpeg_entry_high">高</string>
+    <string name="pref_camera_jpeg_entry_medium">中</string>
+    <string name="pref_camera_jpeg_entry_low">低</string>
+
+    <!-- Settings screen, Select Color effect title -->
+    <string name="pref_camera_coloreffect_title">色彩效果</string>
+
+    <!-- Settings screen, Color effect dialog radio button choices -->
+    <string name="pref_camera_coloreffect_entry_none">无</string>
+    <string name="pref_camera_coloreffect_entry_mono">Mono</string>
+    <string name="pref_camera_coloreffect_entry_sepia">棕褐色</string>
+    <string name="pref_camera_coloreffect_entry_negative">底片</string>
+    <string name="pref_camera_coloreffect_entry_solarize">过曝</string>
+    <string name="pref_camera_coloreffect_entry_posterize">色调分色</string>
+    <string name="pref_camera_coloreffect_entry_aqua">水下</string>
+    <string name="pref_camera_coloreffect_entry_emboss">浮雕</string>
+    <string name="pref_camera_coloreffect_entry_sketch">素描</string>
+    <string name="pref_camera_coloreffect_entry_neon">霓虹</string>
+    <string name="pref_camera_coloreffect_entry_pastel">柔和</string>
+    <string name="pref_camera_coloreffect_entry_mosaic">马赛克</string>
+    <string name="pref_camera_coloreffect_entry_redtint">红色调</string>
+    <string name="pref_camera_coloreffect_entry_bluetint">蓝色调</string>
+    <string name="pref_camera_coloreffect_entry_greentint">绿色调</string>
+
+    <!-- Settings screen, Burst mode title -->
+    <string name="pref_camera_burst_title">连拍模式</string>
+
+    <!-- Settings screen, Burst mode entries -->
+    <string name="pref_camera_burst_entry_off">关闭</string>
+    <string name="pref_camera_burst_entry_5">5 连拍</string>
+    <string name="pref_camera_burst_entry_10">10 连拍</string>
+    <string name="pref_camera_burst_entry_15">15 连拍</string>
+    <string name="pref_camera_burst_entry_20">20 连拍</string>
 </resources>
