@@ -2705,5 +2705,4 @@ public class PhotoModule
             mPieRenderer.hide();
         }
     }
-
 }

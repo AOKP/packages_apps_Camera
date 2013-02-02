@@ -20,6 +20,7 @@ import android.animation.Animator;
 import android.animation.Animator.AnimatorListener;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
@@ -127,6 +128,15 @@ public class CameraSwitcher extends RotateImageView
             item.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    /* Once Photosphere is added to AOSP this will need
+                       to be adjusted to == 4 */
+                    if (index == 3) {
+                        closePopup();
+                        Intent launchGallery = new Intent(Intent.makeMainSelectorActivity(
+                                Intent.ACTION_MAIN, Intent.CATEGORY_APP_GALLERY));
+                        mContext.startActivity(launchGallery);
+                        return;
+                    }
                     onCameraSelected(index);
                 }
             });
@@ -146,6 +156,10 @@ public class CameraSwitcher extends RotateImageView
                 case R.drawable.ic_switch_photosphere:
                     item.setContentDescription(getContext().getResources().getString(
                             R.string.accessibility_switch_to_new_panorama));
+                    break;
+                case R.drawable.ic_switch_gallery:
+                    item.setContentDescription(getContext().getResources().getString(
+                            R.string.accessibility_switch_to_gallery));
                     break;
                 default:
                     break;
