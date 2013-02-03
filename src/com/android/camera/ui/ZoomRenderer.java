@@ -128,7 +128,7 @@ public class ZoomRenderer extends OverlayRenderer
     @Override
     public boolean onScale(ScaleGestureDetector detector) {
        // final float mScaleFactor = detector.getScaleFactor();
-        mScaleFactor = detector.getScaleFactor();
+        mScaleFactor *= detector.getScaleFactor();
 
         mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 2f));
         float circle = (int) (mCircleSize * mScaleFactor * mScaleFactor);
