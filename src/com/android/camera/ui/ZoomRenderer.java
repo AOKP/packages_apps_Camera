@@ -25,6 +25,7 @@ import android.graphics.Rect;
 import android.view.ScaleGestureDetector;
 
 import com.android.camera.R;
+import com.android.gallery3d.ui.Log;
 
 public class ZoomRenderer extends OverlayRenderer
         implements ScaleGestureDetector.OnScaleGestureListener {
@@ -49,7 +50,10 @@ public class ZoomRenderer extends OverlayRenderer
     private int mZoomFraction;
     private Rect mTextBounds;
 
-	private float mScaleFactor;
+	private float mScaleFactor = 1;
+	private float mScaleMax = 2f;
+	private float mScaleMin = 0.1f;
+
 
     public interface OnZoomChangedListener {
         void onZoomStart();
@@ -125,22 +129,30 @@ public class ZoomRenderer extends OverlayRenderer
                 mTextPaint);
     }
 
+    
     @Override
     public boolean onScale(ScaleGestureDetector detector) {
        // final float mScaleFactor = detector.getScaleFactor();
         mScaleFactor *= detector.getScaleFactor();
-
-        mScaleFactor = Math.max(0.1f, Math.min(mScaleFactor, 2f));
-        float circle = (int) (mCircleSize * mScaleFactor * mScaleFactor);
+        mScaleFactor = Math.max(mScaleMin, Math.min(mScaleFactor, mScaleMax));
+        float circle = (int) (mCircleSize * mScaleFactor);
         circle = Math.max(mMinCircle, circle);
         circle = Math.min(mMaxCircle, circle);
+       /* if(circle == mMinCircle){
+        	mScaleMin = mScaleFactor;
+        }else if(circle == mMaxCircle){
+        	mScaleMax = mScaleFactor;
+        }*/
+        Log.w("CameraZoom", "SF:"+detector.getScaleFactor()+" mSF:"+mScaleFactor+" Circle:"+circle);
         if (mListener != null && (int) circle != mCircleSize) {
             mCircleSize = (int) circle;
             int zoom = mMinZoom + (int) ((mCircleSize - mMinCircle) * (mMaxZoom - mMinZoom) / (mMaxCircle - mMinCircle));
+            Log.w("CameraZoom", "SF:"+detector.getScaleFactor()+" mSF:"+mScaleFactor+" Zoom:"+zoom);
             mListener.onZoomValueChanged(zoom);
         }
         return true;
     }
+
 
     @Override
     public boolean onScaleBegin(ScaleGestureDetector detector) {
