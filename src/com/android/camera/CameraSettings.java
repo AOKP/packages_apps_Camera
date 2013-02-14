@@ -37,6 +37,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.Locale;
 
 /**
  *  Provides utilities and keys for Camera settings.
@@ -353,7 +354,7 @@ public class CameraSettings {
     private static List<String> sizeListToStringList(List<Size> sizes) {
         ArrayList<String> list = new ArrayList<String>();
         for (Size size : sizes) {
-            list.add(String.format("%dx%d", size.width, size.height));
+            list.add(String.format(Locale.ENGLISH, "%dx%d", size.width, size.height));
         }
         return list;
     }
