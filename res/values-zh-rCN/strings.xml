@@ -122,6 +122,7 @@
     <string name="accessibility_switch_to_video" msgid="4991396355234561505">"切换到视频模式"</string>
     <string name="accessibility_switch_to_panorama" msgid="604756878371875836">"切换到全景模式"</string>
     <string name="accessibility_switch_to_new_panorama" msgid="8116783308051524188">"切换到新的全景模式"</string>
+    <string name="accessibility_switch_to_gallery">切换到图库</string>
     <string name="accessibility_review_cancel" msgid="9070531914908644686">"取消"</string>
     <string name="accessibility_review_ok" msgid="7793302834271343168">"完成"</string>
     <string name="accessibility_review_retake" msgid="659300290054705484">"重拍"</string>
