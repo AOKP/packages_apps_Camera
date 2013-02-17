@@ -354,7 +354,7 @@ public class CameraSettings {
     private static List<String> sizeListToStringList(List<Size> sizes) {
         ArrayList<String> list = new ArrayList<String>();
         for (Size size : sizes) {
-            list.add(String.format(Locale.ENGLISH, "%dx%d", size.width, size.height));
+            list.add(String.format("%dx%d", size.width, size.height));
         }
         return list;
     }
