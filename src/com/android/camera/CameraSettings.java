@@ -35,9 +35,9 @@ import com.android.gallery3d.common.ApiHelper;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.Locale;
 
 /**
  *  Provides utilities and keys for Camera settings.
@@ -236,7 +236,8 @@ public class CameraSettings {
             }
         }
         if (cameraHdr != null && (!ApiHelper.HAS_CAMERA_HDR
-                    || !Util.isCameraHdrSupported(mParameters))) {
+                    || !Util.isCameraHdrSupported(mParameters))
+                    && !Util.useSoftwareHDR()) {
             removePreference(group, cameraHdr.getKey());
         }
         if (isoMode != null) {
@@ -354,7 +355,7 @@ public class CameraSettings {
     private static List<String> sizeListToStringList(List<Size> sizes) {
         ArrayList<String> list = new ArrayList<String>();
         for (Size size : sizes) {
-            list.add(String.format("%dx%d", size.width, size.height));
+            list.add(String.format(Locale.ENGLISH, "%dx%d", size.width, size.height));
         }
         return list;
     }
