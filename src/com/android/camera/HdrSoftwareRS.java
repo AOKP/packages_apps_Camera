@@ -20,6 +20,7 @@ import com.android.camera.ScriptC_HdrSoftware;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.renderscript.Allocation;
+import android.renderscript.Element;
 import android.renderscript.Matrix4f;
 import android.renderscript.ProgramFragment;
 import android.renderscript.ProgramFragmentFixedFunction;
@@ -61,6 +62,28 @@ public class HdrSoftwareRS {
      * Run the processing
      */
     public void process() {
+        // We make the output bitmap based on the inputs.
+        // We don't really care about the content at this point, we just need the same size
+        // and pixel depth.
+        mOutBitmapAlloc = Allocation.createTyped(mRS, mInBitmapAlloc[BITMAP_LOW].getType());
+        mScript.bind_gOutput(mOutBitmapAlloc);
+
+        // We refer to the row of the images through an alloc to parallelize processing
+        int num_rows = mOutBitmap.getHeight();
+        int row_width = mOutBitmap.getWidth();
+
+        int[] row_indices = new int[num_rows];
+        for (int i = 0; i < num_rows; i++) {
+            row_indices[i] = i * row_width;
+        }
+
+        Allocation row_indices_alloc = Allocation.createSized(mRS, Element.I32(mRS), num_rows, Allocation.USAGE_SCRIPT);
+        row_indices_alloc.copyFrom(row_indices);
+
+        mScript.set_gInIndex(row_indices_alloc);
+        mScript.set_gImageWidth(row_width);
+        mScript.set_gScript(mScript);
+
         // We run the script...
         mScript.invoke_performHdrComputation();
 
@@ -77,41 +100,43 @@ public class HdrSoftwareRS {
 
     /**
      * Set the input bitmaps for the processing.
-     * @param bm_lo Bitmap of the picture with the lowest exposure
-     * @param bm_mid Bitmap of the picture with normal exposure
-     * @param bm_hi Bitmap of the picture with highest exposure
+     * @param input Bitmap to import
+     * @param input_image HdrSoftwareRS.BITMAP_LOW, BITMAP_MID, BITMAP_HI
      */
-    public void setBitmapInput(Bitmap bm_lo, Bitmap bm_mid, Bitmap bm_hi) {
-        if (bm_lo == null || bm_mid == null || bm_hi == null) {
-            Log.e(TAG, "Cannot set HdrSoftware input bitmaps: One of the input is null");
+    public void setBitmapInput(Bitmap input, int input_image) {
+        if (input == null) {
+            Log.e(TAG, "Cannot set HdrSoftware input bitmap " + input_image + ": input is null");
             return;
 	}
 
-        // We allocate and copy the bitmaps for the RS script
-        for (int i = 0; i < 3; i++) {
-            if (mInBitmapAlloc[i] != null) {
-                mInBitmapAlloc[i].destroy();
-            }
+        if (input_image < BITMAP_LOW || input_image > BITMAP_HI) {
+            Log.e(TAG, "Invalid slot " + input_image + " for HDR input");
+            return;
         }
 
-        mInBitmapAlloc[BITMAP_LOW] = Allocation.createFromBitmap(mRS, bm_lo,  Allocation.MipmapControl.MIPMAP_NONE, Allocation.USAGE_SCRIPT);
-        mInBitmapAlloc[BITMAP_MID] = Allocation.createFromBitmap(mRS, bm_mid, Allocation.MipmapControl.MIPMAP_NONE, Allocation.USAGE_SCRIPT);
-        mInBitmapAlloc[BITMAP_HI]  = Allocation.createFromBitmap(mRS, bm_hi,  Allocation.MipmapControl.MIPMAP_NONE, Allocation.USAGE_SCRIPT);
-
-        // We make the output bitmap based on the inputs.
-        // We don't really care about the content at this point, we just need the same size
-        // and pixel depth.
-        mOutBitmapAlloc = Allocation.createTyped(mRS, mInBitmapAlloc[BITMAP_LOW].getType());
+        mInBitmapAlloc[input_image] = Allocation.createFromBitmap(mRS, input, 
+                                          Allocation.MipmapControl.MIPMAP_NONE, Allocation.USAGE_SCRIPT);
 
         // Bind our allocations to our script
-        mScript.set_gInputLow(mInBitmapAlloc[BITMAP_LOW]);
-        mScript.set_gInputMid(mInBitmapAlloc[BITMAP_MID]);
-        mScript.set_gInputHi(mInBitmapAlloc[BITMAP_HI]);
-        mScript.set_gOutput(mOutBitmapAlloc);
+        switch (input_image) {
+        case BITMAP_LOW:
+            mScript.bind_gInputLow(mInBitmapAlloc[BITMAP_LOW]);
+            break;
 
-        // We prepare our local output bitmap, we can copy the format and size from the
-        // current inputs
-        mOutBitmap = Bitmap.createBitmap(bm_lo.getWidth(), bm_lo.getHeight(), bm_lo.getConfig());
+        case BITMAP_MID:
+            mScript.bind_gInputMid(mInBitmapAlloc[BITMAP_MID]);
+            break;
+
+        case BITMAP_HI:
+            mScript.bind_gInputHi(mInBitmapAlloc[BITMAP_HI]);
+            break;
+        }
+
+        if (mOutBitmap == null) {
+            // We prepare our local output bitmap, we can copy the format and size from the
+            // current inputs
+            mOutBitmap = Bitmap.createBitmap(input.getWidth(), input.getHeight(), input.getConfig());
+        }
     }
 }
 
