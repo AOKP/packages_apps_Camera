@@ -228,6 +228,16 @@ public class VideoModule implements CameraModule,
 
     // The degrees of the device rotated clockwise from its natural orientation.
     private int mOrientation = OrientationEventListener.ORIENTATION_UNKNOWN;
+    // The orientation compensation for icons and dialogs. Ex: if the value
+    // is 90, the UI components should be rotated 90 degrees counter-clockwise.
+    private int mOrientationCompensation = 0;
+
+    // If mOrientationResetNeeded is set to be true, onOrientationChanged will reset
+    // the orientation of the on screen indicators to the current orientation compensation
+    // regardless of whether it's the same as the most recent orientation compensation
+    private boolean mOrientationResetNeeded;
+    // The orientation compensation when we start recording.
+    private int mOrientationCompensationAtRecordStart;
 
     private int mZoomValue;  // The current zoom value.
     private int mZoomMax;
@@ -1337,6 +1347,8 @@ public class VideoModule implements CameraModule,
         }
         mEffectsRecorder.setOrientationHint(orientation);
 
+        mOrientationCompensationAtRecordStart = mOrientationCompensation;
+
         CameraScreenNail screenNail = (CameraScreenNail) mActivity.mCameraScreenNail;
         mEffectsRecorder.setPreviewSurfaceTexture(screenNail.getSurfaceTexture(),
                 screenNail.getWidth(), screenNail.getHeight());
@@ -1685,7 +1697,8 @@ public class VideoModule implements CameraModule,
             // it to match the UI orientation (and mirror if it is front-facing camera).
             CameraInfo[] info = CameraHolder.instance().getCameraInfo();
             boolean mirror = (info[mCameraId].facing == CameraInfo.CAMERA_FACING_FRONT);
-            bitmap = Util.rotateAndMirror(bitmap, 0, mirror);
+            bitmap = Util.rotateAndMirror(bitmap, -mOrientationCompensationAtRecordStart,
+                    mirror);
             mReviewImage.setImageBitmap(bitmap);
             mReviewImage.setVisibility(View.VISIBLE);
         }
@@ -1773,7 +1786,7 @@ public class VideoModule implements CameraModule,
             }
             // The orientation was fixed during video recording. Now make it
             // reflect the device orientation as video recording is stopped.
-            setOrientationIndicator(0, true);
+            setOrientationIndicator(mOrientationCompensation, true);
             keepScreenOnAwhile();
             if (shouldAddToMediaStoreNow) {
                 if (addVideoToMediaStore()) fail = true;
@@ -2348,7 +2361,7 @@ public class VideoModule implements CameraModule,
 
         // From onResume
         initializeZoom();
-        setOrientationIndicator(0, false);
+        setOrientationIndicator(mOrientationCompensation, false);
 
         if (ApiHelper.HAS_SURFACE_TEXTURE) {
             // Start switch camera animation. Post a message because
@@ -2668,7 +2681,7 @@ public class VideoModule implements CameraModule,
     }
 
     private void showTapToSnapshotToast() {
-        new RotateTextToast(mActivity, R.string.video_snapshot_hint, 0)
+        new RotateTextToast(mActivity, R.string.video_snapshot_hint, mOrientationCompensation)
                 .show();
         // Clear the preference.
         Editor editor = mPreferences.edit();
@@ -2837,6 +2850,8 @@ public class VideoModule implements CameraModule,
         mBlocker.setVisibility(View.INVISIBLE);
         setShowMenu(false);
         mPopup = popup;
+        // Make sure popup is brought up with the right orientation
+        mPopup.setOrientation(mOrientationCompensation, false);
         mPopup.setVisibility(View.VISIBLE);
         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
                 LayoutParams.WRAP_CONTENT);
