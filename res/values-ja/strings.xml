@@ -54,8 +54,14 @@
     <string name="pref_camera_picturesize_entry_qvga" msgid="8576186463069770133">"QVGA"</string>
     <string name="pref_camera_focusmode_title" msgid="2877248921829329127">"フォーカスモード"</string>
     <string name="pref_camera_focusmode_entry_auto" msgid="7374820710300362457">"オート"</string>
+    <string name="pref_camera_focusmode_entry_continuouspicture">連射</string>
+    <string name="pref_camera_focusmode_entry_extended">拡張</string>
+    <string name="pref_camera_focusmode_entry_facedetect">顔検出</string>
+    <string name="pref_camera_focusmode_entry_facepriority">顔優先</string>
+    <string name="pref_camera_focusmode_entry_fixed">固定</string>
     <string name="pref_camera_focusmode_entry_infinity" msgid="3413922419264967552">"無限遠"</string>
     <string name="pref_camera_focusmode_entry_macro" msgid="4424489110551866161">"マクロ"</string>
+    <string name="pref_camera_focusmode_entry_portrait">人物</string>
     <string name="pref_camera_flashmode_title" msgid="2287362477238791017">"フラッシュモード"</string>
     <string name="pref_camera_flashmode_entry_auto" msgid="7288383434237457709">"オート"</string>
     <string name="pref_camera_flashmode_entry_on" msgid="5330043918845197616">"ON"</string>
@@ -69,10 +75,34 @@
     <string name="pref_camera_scenemode_title" msgid="1420535844292504016">"撮影モード"</string>
     <string name="pref_camera_scenemode_entry_auto" msgid="7113995286836658648">"オート"</string>
     <string name="pref_camera_scenemode_entry_hdr" msgid="2923388802899511784">"HDR"</string>
-    <string name="pref_camera_scenemode_entry_action" msgid="616748587566110484">"スポーツ"</string>
+    <string name="pref_camera_scenemode_entry_action" msgid="616748587566110484">"アクション"</string>
     <string name="pref_camera_scenemode_entry_night" msgid="7606898503102476329">"夜景"</string>
+    <string name="pref_camera_scenemode_entry_nightportrait">夜の人物</string>
+    <string name="pref_camera_scenemode_entry_nightindoor">夜の室内</string>
+    <string name="pref_camera_scenemode_entry_supernight">闇夜</string>
     <string name="pref_camera_scenemode_entry_sunset" msgid="181661154611507212">"夕焼け"</string>
     <string name="pref_camera_scenemode_entry_party" msgid="907053529286788253">"パーティー"</string>
+    <string name="pref_camera_scenemode_entry_duskdawn">夕暮れ 夜明け</string>
+    <string name="pref_camera_scenemode_entry_candlelight">蝋燭の灯り</string>
+    <string name="pref_camera_scenemode_entry_fallcolor">紅葉</string>
+    <string name="pref_camera_scenemode_entry_closeup">接写</string>
+    <string name="pref_camera_scenemode_entry_landscape">風景</string>
+    <string name="pref_camera_scenemode_entry_aqua">水</string>
+    <string name="pref_camera_scenemode_entry_sports">スポーツ</string>
+    <string name="pref_camera_scenemode_entry_mood">ムード</string>
+    <string name="pref_camera_scenemode_entry_fireworks">花火</string>
+    <string name="pref_camera_scenemode_entry_cine">映画</string>
+    <string name="pref_camera_scenemode_entry_oldfilm">古いフィルム</string>
+    <string name="pref_camera_scenemode_entry_beach">ビーチ</string>
+    <string name="pref_camera_scenemode_entry_portrait">人物</string>
+    <string name="pref_camera_scenemode_entry_snow">雪</string>
+    <string name="pref_camera_scenemode_entry_steadyphoto">友達</string>
+    <string name="pref_camera_scenemode_entry_theatre">シアター</string>
+    <string name="pref_camera_scenemode_entry_backlight">ブラックライト</string>
+    <string name="pref_camera_scenemode_entry_document">ドキュメント</string>
+    <string name="pref_camera_scenemode_entry_barcode">バーコード</string>
+    <string name="pref_camera_scenemode_entry_text">テキスト</string>
+
     <string name="not_selectable_in_scene_mode" msgid="2970291701448555126">"撮影モードでは選択できません。"</string>
     <string name="pref_exposure_title" msgid="1229093066434614811">"露出"</string>
     <!-- no translation found for pref_camera_hdr_default (1336869406134365882) -->
@@ -122,6 +152,8 @@
     <string name="accessibility_switch_to_video" msgid="4991396355234561505">"動画に切り替え"</string>
     <string name="accessibility_switch_to_panorama" msgid="604756878371875836">"パノラマに切り替え"</string>
     <string name="accessibility_switch_to_new_panorama" msgid="8116783308051524188">"新しいパノラマに切り替える"</string>
+    <!-- The button to switch to the Gallery. [CHAR LIMIT = NONE] -->
+    <string name="accessibility_switch_to_gallery">ギャラリーに切り替え</string>
     <string name="accessibility_review_cancel" msgid="9070531914908644686">"レビュー - キャンセル"</string>
     <string name="accessibility_review_ok" msgid="7793302834271343168">"レビュー - 完了"</string>
     <string name="accessibility_review_retake" msgid="659300290054705484">"撮り直しを確認"</string>
@@ -235,5 +267,18 @@
     <string name="pref_camera_burst_entry_10">10枚</string>
     <string name="pref_camera_burst_entry_15">15枚</string>
     <string name="pref_camera_burst_entry_20">20枚</string>
+
+    <!-- Touch-to-focus duration settings -->
+    <string name="pref_camera_focustime_title">タッチフォーカス期間</string>
+    <string name="pref_camera_focustime_summary">タッチフォーカス期間を選択する</string>
+    <string name="pref_camera_focustime_default" translatable="false">5000</string>
+
+    <!-- Settings screen, Timer mode entries -->
+    <string name="pref_camera_focustime_entry_5">5秒</string>
+    <string name="pref_camera_focustime_entry_10">10秒</string>
+    <string name="pref_camera_focustime_entry_15">15秒</string>
+    <string name="pref_camera_focustime_entry_20">20秒</string>
+    <string name="pref_camera_focustime_entry_30">30秒</string>
+    <string name="pref_camera_focustime_entry_infinite">無限</string>
 
 </resources>
