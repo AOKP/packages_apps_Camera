@@ -34,7 +34,7 @@
     <string name="pref_camera_id_title" msgid="4040791582294635851">"Zvolit fotoaparát"</string>
     <string name="pref_camera_id_entry_back" msgid="5142699735103692485">"Zadní"</string>
     <string name="pref_camera_id_entry_front" msgid="5668958706828733669">"Přední"</string>
-    <string name="pref_camera_recordlocation_title" msgid="371208839215448917">"Úložiště"</string>
+    <string name="pref_camera_recordlocation_title" msgid="371208839215448917">"Poloha"</string>
     <string name="setting_off" msgid="4480039384202951946">"Vypnuto"</string>
     <string name="setting_on" msgid="8602246224465348901">"Zapnuto"</string>
     <string name="pref_video_quality_title" msgid="8245379279801096922">"Kvalita videa"</string>
@@ -245,4 +245,7 @@
     <string name="pref_camera_scenemode_entry_document">Dokument</string>
     <string name="pref_camera_scenemode_entry_barcode">Barcode</string>
     <string name="pref_camera_scenemode_entry_text">Text</string>
+    <string name="pref_camera_focustime_title">Doba zaostření dotykem</string>
+    <string name="pref_camera_focustime_summary">Zvolit dobu zaostření dotykem</string>
+    <string name="pref_camera_focustime_entry_infinite">Nekonečná</string>
 </resources>
