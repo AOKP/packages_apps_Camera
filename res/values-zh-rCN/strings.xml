@@ -217,10 +217,25 @@
     <!-- Settings screen, Burst mode title -->
     <string name="pref_camera_burst_title">连拍模式</string>
 
+
     <!-- Settings screen, Burst mode entries -->
     <string name="pref_camera_burst_entry_off">关闭</string>
     <string name="pref_camera_burst_entry_5">5 连拍</string>
     <string name="pref_camera_burst_entry_10">10 连拍</string>
     <string name="pref_camera_burst_entry_15">15 连拍</string>
     <string name="pref_camera_burst_entry_20">20 连拍</string>
+
+    <!-- Touch-to-focus duration settings -->
+    <string name="pref_camera_focustime_title">触摸对焦持续时间</string>
+    <string name="pref_camera_focustime_summary">为触摸对焦选择持续时间</string>
+
+
+    <!-- Settings screen, Timer mode entries -->
+    <string name="pref_camera_focustime_entry_5">5秒</string>
+    <string name="pref_camera_focustime_entry_10">10秒</string>
+    <string name="pref_camera_focustime_entry_15">15秒</string>
+    <string name="pref_camera_focustime_entry_20">20秒</string>
+    <string name="pref_camera_focustime_entry_30">30秒</string>
+    <string name="pref_camera_focustime_entry_infinite">无限</string>
+
 </resources>
