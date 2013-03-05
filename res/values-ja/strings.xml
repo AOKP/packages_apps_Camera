@@ -54,7 +54,8 @@
     <string name="pref_camera_picturesize_entry_qvga" msgid="8576186463069770133">"QVGA"</string>
     <string name="pref_camera_focusmode_title" msgid="2877248921829329127">"フォーカスモード"</string>
     <string name="pref_camera_focusmode_entry_auto" msgid="7374820710300362457">"オート"</string>
-    <string name="pref_camera_focusmode_entry_continuouspicture">連射</string>
+    <string name="pref_camera_focusmode_entry_continuouspicture">連続写真</string>
+    <string name="pref_camera_focusmode_entry_continuousvideo">連続ビデオ</string>
     <string name="pref_camera_focusmode_entry_extended">拡張</string>
     <string name="pref_camera_focusmode_entry_facedetect">顔検出</string>
     <string name="pref_camera_focusmode_entry_facepriority">顔優先</string>
@@ -62,6 +63,7 @@
     <string name="pref_camera_focusmode_entry_infinity" msgid="3413922419264967552">"無限遠"</string>
     <string name="pref_camera_focusmode_entry_macro" msgid="4424489110551866161">"マクロ"</string>
     <string name="pref_camera_focusmode_entry_portrait">人物</string>
+    <string name="pref_camera_focusmode_entry_hyperfocal">過焦点</string>
     <string name="pref_camera_flashmode_title" msgid="2287362477238791017">"フラッシュモード"</string>
     <string name="pref_camera_flashmode_entry_auto" msgid="7288383434237457709">"オート"</string>
     <string name="pref_camera_flashmode_entry_on" msgid="5330043918845197616">"ON"</string>
@@ -98,10 +100,15 @@
     <string name="pref_camera_scenemode_entry_snow">雪</string>
     <string name="pref_camera_scenemode_entry_steadyphoto">友達</string>
     <string name="pref_camera_scenemode_entry_theatre">シアター</string>
-    <string name="pref_camera_scenemode_entry_backlight">ブラックライト</string>
+    <string name="pref_camera_scenemode_entry_backlight">逆光</string>
+    <string name="pref_camera_scenemode_entry_backlightportrait">逆光(人物)</string>
     <string name="pref_camera_scenemode_entry_document">ドキュメント</string>
     <string name="pref_camera_scenemode_entry_barcode">バーコード</string>
     <string name="pref_camera_scenemode_entry_text">テキスト</string>
+    <string name="pref_camera_scenemode_entry_beauty">ビューティ</string>
+    <string name="pref_camera_scenemode_entry_flowers">花</string>
+    <string name="pref_camera_scenemode_entry_whiteboard">ホワイトボード</string>
+    <string name="pref_camera_scenemode_entry_backgroundblur">背景ぼかし</string>
 
     <string name="not_selectable_in_scene_mode" msgid="2970291701448555126">"撮影モードでは選択できません。"</string>
     <string name="pref_exposure_title" msgid="1229093066434614811">"露出"</string>
