@@ -272,4 +272,20 @@
     <string name="pref_camera_focustime_entry_30">30秒</string>
     <string name="pref_camera_focustime_entry_infinite">无限</string>
 
+    <string name="pref_camera_nohands_title">免提快门</string>
+
+    <!-- Settings screen, Timer mode entries -->
+    <string name="pref_camera_timer_entry_0">关闭</string>
+    <string name="pref_camera_timer_entry_10">10秒</string>
+    <string name="pref_camera_timer_entry_20">20秒</string>
+    <string name="pref_camera_timer_entry_30">30秒</string>
+    <string name="pref_camera_timer_entry_40">40秒</string>
+    <string name="pref_camera_timer_entry_50">50秒</string>
+    <string name="pref_camera_timer_entry_60">60秒</string>
+
+    <string name="voice_hint">在远处说出触发词即可拍摄照片：你可以使用\'Kang\'，\'Swag\'，当然也可以\'Cheese!\'</string>
+
+    <!-- Persistent remote shutter -->
+    <string name="pref_nohands_persistent_title">保持免提状态</string>
+
 </resources>
