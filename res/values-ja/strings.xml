@@ -43,19 +43,27 @@
     <string name="pref_video_time_lapse_frame_interval_title" msgid="6245716906744079302">"低速度撮影"</string>
     <string name="pref_camera_settings_category" msgid="2576236450859613120">"カメラ設定"</string>
     <string name="pref_camcorder_settings_category" msgid="460313486231965141">"ビデオ録画設定"</string>
+    <!-- More Settings screen, storage title -->
+    <string name="pref_camera_storage_title">ストレージ</string>
     <string name="pref_camera_picturesize_title" msgid="4333724936665883006">"表示サイズ"</string>
     <string name="pref_camera_picturesize_entry_13mp">13Mピクセル</string>
+    <string name="pref_camera_picturesize_entry_12_8mp">12.8Mピクセル</string>
     <string name="pref_camera_picturesize_entry_11_5mp">11.5Mピクセル</string>
     <string name="pref_camera_picturesize_entry_9mp">9Mピクセル</string>
     <string name="pref_camera_picturesize_entry_8mp" msgid="259953780932849079">"8Mピクセル"</string>
     <string name="pref_camera_picturesize_entry_6_4mp">6.4Mピクセル</string>
-    <string name="pref_camera_picturesize_entry_5mp" msgid="2882928212030661159">"5メガピクセル"</string>
-    <string name="pref_camera_picturesize_entry_3mp" msgid="741415860337400696">"3メガピクセル"</string>
+    <string name="pref_camera_picturesize_entry_5mp" msgid="2882928212030661159">"5Mピクセル"</string>
+    <string name="pref_camera_picturesize_entry_4mp">4Mピクセル</string>
+    <string name="pref_camera_picturesize_entry_3mp" msgid="741415860337400696">"3Mピクセル"</string>
     <string name="pref_camera_picturesize_entry_2_5mp">2.5Mピクセル</string>
     <string name="pref_camera_picturesize_entry_2_1mp">2.1Mピクセル</string>
-    <string name="pref_camera_picturesize_entry_2mp" msgid="1753709802245460393">"2メガピクセル"</string>
-    <string name="pref_camera_picturesize_entry_1_3mp" msgid="829109608140747258">"1.3メガピクセル"</string>
-    <string name="pref_camera_picturesize_entry_1mp" msgid="1669725616780375066">"1メガピクセル"</string>
+    <string name="pref_camera_picturesize_entry_2mp" msgid="1753709802245460393">"2Mピクセル"</string>
+    <string name="pref_camera_picturesize_entry_1_5mp">1.5M pixels</string>
+    <string name="pref_camera_picturesize_entry_1_3mp" msgid="829109608140747258">"1.3Mピクセル"</string>
+    <string name="pref_camera_picturesize_entry_1mp" msgid="1669725616780375066">"1Mピクセル"</string>
+    <string name="pref_camera_picturesize_entry_xga">XGA</string>
+    <string name="pref_camera_picturesize_entry_svga">SVGA</string>
+    <string name="pref_camera_picturesize_entry_wvga">WVGA</string>
     <string name="pref_camera_picturesize_entry_vga" msgid="806934254162981919">"VGA"</string>
     <string name="pref_camera_picturesize_entry_qvga" msgid="8576186463069770133">"QVGA"</string>
     <string name="pref_camera_focusmode_title" msgid="2877248921829329127">"フォーカスモード"</string>
@@ -293,5 +301,21 @@
     <string name="pref_camera_focustime_entry_20">20秒</string>
     <string name="pref_camera_focustime_entry_30">30秒</string>
     <string name="pref_camera_focustime_entry_infinite">無限</string>
+
+    <string name="pref_camera_nohands_title">ハンズフリーシャッター</string>
+
+    <!-- Settings screen, Timer mode entries -->
+    <string name="pref_camera_timer_entry_0">オフ</string>
+    <string name="pref_camera_timer_entry_10">10秒</string>
+    <string name="pref_camera_timer_entry_20">20秒</string>
+    <string name="pref_camera_timer_entry_30">30秒</string>
+    <string name="pref_camera_timer_entry_40">40秒</string>
+    <string name="pref_camera_timer_entry_50">50秒</string>
+    <string name="pref_camera_timer_entry_60">60秒</string>
+
+    <string name="voice_hint">離れたところからでもキーワードの声で写真を撮ることができます。キーワード: \'Cheese!\' または \'Kang\', \'Swag\'</string>
+
+    <!-- Persistent remote shutter -->
+    <string name="pref_nohands_persistent_title">ハンズフリー継続</string>
 
 </resources>
