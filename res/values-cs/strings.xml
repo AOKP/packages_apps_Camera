@@ -44,10 +44,19 @@
     <string name="pref_camera_settings_category" msgid="2576236450859613120">"Nastavení fotoaparátu"</string>
     <string name="pref_camcorder_settings_category" msgid="460313486231965141">"Nastavení videokamery"</string>
     <string name="pref_camera_picturesize_title" msgid="4333724936665883006">"Velikost fotografií"</string>
-    <string name="pref_camera_picturesize_entry_8mp" msgid="259953780932849079">"8 megapixelů"</string>
+    <string name="pref_camera_picturesize_entry_13mp">13 Mpx</string>
+    <string name="pref_camera_picturesize_entry_12_8mp">12,8 Mpx</string>
+    <string name="pref_camera_picturesize_entry_11_5mp">11,5 Mpx</string>
+    <string name="pref_camera_picturesize_entry_9mp">9 Mpx</string>
+    <string name="pref_camera_picturesize_entry_8mp" msgid="259953780932849079">"8 Mpx"</string>
+    <string name="pref_camera_picturesize_entry_6_4mp">6,4 Mpx</string>
     <string name="pref_camera_picturesize_entry_5mp" msgid="2882928212030661159">"5 Mpx"</string>
+    <string name="pref_camera_picturesize_entry_4mp">4 Mpx</string>
     <string name="pref_camera_picturesize_entry_3mp" msgid="741415860337400696">"3 Mpx"</string>
+    <string name="pref_camera_picturesize_entry_2_5mp">2,5 Mpx</string>
+    <string name="pref_camera_picturesize_entry_2_1mp">2,1 Mpx</string>
     <string name="pref_camera_picturesize_entry_2mp" msgid="1753709802245460393">"2 Mpx"</string>
+    <string name="pref_camera_picturesize_entry_1_5mp">1,5 Mpx</string>
     <string name="pref_camera_picturesize_entry_1_3mp" msgid="829109608140747258">"1,3 Mpx"</string>
     <string name="pref_camera_picturesize_entry_1mp" msgid="1669725616780375066">"1 Mpx"</string>
     <string name="pref_camera_picturesize_entry_vga" msgid="806934254162981919">"VGA"</string>
@@ -248,4 +257,14 @@
     <string name="pref_camera_focustime_title">Doba zaostření dotykem</string>
     <string name="pref_camera_focustime_summary">Zvolit dobu zaostření dotykem</string>
     <string name="pref_camera_focustime_entry_infinite">Nekonečná</string>
+    <string name="pref_camera_nohands_title">Bezdotykové focení</string>
+    <string name="pref_camera_timer_entry_0">Vypnuto</string>
+    <string name="pref_camera_timer_entry_10">10s</string>
+    <string name="pref_camera_timer_entry_20">20s</string>
+    <string name="pref_camera_timer_entry_30">30s</string>
+    <string name="pref_camera_timer_entry_40">40s</string>
+    <string name="pref_camera_timer_entry_50">50s</string>
+    <string name="pref_camera_timer_entry_60">60s</string>
+    <string name="voice_hint">Pořízení fotografie vyslovením určitého slova: pro vyfocení je možné použít \'Kang\', \'Swag\' a samozřejmě \'Cheese!\'</string>
+    <string name="pref_nohands_persistent_title">Trvalé bezdotykové focení</string>
 </resources>
