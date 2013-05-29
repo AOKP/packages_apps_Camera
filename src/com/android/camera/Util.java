@@ -157,6 +157,9 @@ public class Util {
     // Samsung ZSL mode
     private static boolean sEnableZSL;
 
+    // Workaround for cameras who need aspect ratio fixes
+    private static boolean sEnableAspectRatioFixes;
+
     // Workaround for QC cameras with broken face detection on front camera
     private static boolean sNoFaceDetectOnFrontCamera;
 
@@ -198,6 +201,8 @@ public class Util {
         sProfileVideoSize = context.getResources().getBoolean(R.bool.useProfileVideoSize);
         sEarlyVideoSize = context.getResources().getBoolean(R.bool.needsEarlyVideoSize);
         sEnableZSL = context.getResources().getBoolean(R.bool.enableZSL);
+        sEnableAspectRatioFixes = context.getResources().getBoolean(
+                R.bool.enableAspectRatioFixes);
         sNoFaceDetectOnFrontCamera = context.getResources().getBoolean(
                 R.bool.noFaceDetectOnFrontCamera);
 
@@ -281,6 +286,10 @@ public class Util {
 
     public static boolean sendMagicSamsungZSLCommand() {
         return sSendMagicSamsungZSLCommand;
+    }
+
+    public static boolean enableAspectRatioFixes() {
+        return sEnableAspectRatioFixes;
     }
 
     public static void enableSpeechRecognition(boolean enable, PhotoModule module) {
