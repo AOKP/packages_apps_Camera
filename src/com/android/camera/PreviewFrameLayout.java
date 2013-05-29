@@ -1,5 +1,9 @@
 /*
  * Copyright (C) 2009 The Android Open Source Project
+ * Copyright (c) 2013, Linux Foundation. All rights reserved.
+ *
+ * Not a Contribution. Apache license notifications and license are
+ * retained for attribution purposes only
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,11 +47,17 @@ public class PreviewFrameLayout extends RelativeLayout implements LayoutChangeNo
     private View mBorder;
     private OnSizeChangedListener mListener;
     private LayoutChangeHelper mLayoutChangeHelper;
+    private boolean mOrientationResize;
+    private boolean mPrevOrientationResize;
 
     public PreviewFrameLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         setAspectRatio(4.0 / 3.0);
         mLayoutChangeHelper = new LayoutChangeHelper(this);
+        if (Util.enableAspectRatioFixes()) {
+            mOrientationResize = false;
+            mPrevOrientationResize = false;
+        }
     }
 
     @Override
@@ -64,6 +74,13 @@ public class PreviewFrameLayout extends RelativeLayout implements LayoutChangeNo
         }
     }
 
+    public void cameraOrientationPreviewResize(boolean orientation){
+         if (Util.enableAspectRatioFixes()) {
+             mPrevOrientationResize = mOrientationResize;
+             mOrientationResize = orientation;
+         }
+    }
+
     public void setAspectRatio(double ratio) {
         if (ratio <= 0.0) throw new IllegalArgumentException();
 
@@ -74,7 +91,14 @@ public class PreviewFrameLayout extends RelativeLayout implements LayoutChangeNo
 
         if (mAspectRatio != ratio) {
             mAspectRatio = ratio;
-            requestLayout();
+            if (Util.enableAspectRatioFixes()) {
+                requestLayout();
+            }
+        }
+        if (Util.enableAspectRatioFixes()) {
+            if(mOrientationResize != mPrevOrientationResize) {
+                requestLayout();
+            }
         }
     }
 
@@ -90,6 +114,8 @@ public class PreviewFrameLayout extends RelativeLayout implements LayoutChangeNo
     protected void onMeasure(int widthSpec, int heightSpec) {
         int previewWidth = MeasureSpec.getSize(widthSpec);
         int previewHeight = MeasureSpec.getSize(heightSpec);
+        int originalWidth = previewWidth;
+        int originalHeight = previewHeight;
 
         // Get the padding of the border background.
         int hPadding = getPaddingLeft() + getPaddingRight();
@@ -98,6 +124,17 @@ public class PreviewFrameLayout extends RelativeLayout implements LayoutChangeNo
         // Resize the preview frame with correct aspect ratio.
         previewWidth -= hPadding;
         previewHeight -= vPadding;
+
+        if (Util.enableAspectRatioFixes()) {
+            if (mOrientationResize) {
+                previewHeight = (int) (previewWidth * mAspectRatio);
+
+                if (previewHeight > originalHeight) {
+                    previewWidth = (int)(((double)originalHeight / (double)previewHeight) * previewWidth);
+                    previewHeight = originalHeight;
+                }
+            }
+        }
 
         // Add the padding of the border.
         previewWidth += hPadding;
