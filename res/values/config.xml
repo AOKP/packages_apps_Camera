@@ -52,4 +52,6 @@
     <bool name="sendMagicSamsungZSLCommand">false</bool>
     <!-- Whether to enable aspect ratio fixes on certain devices -->
     <bool name="enableAspectRatioFixes">false</bool>
+    <!-- HDR mode for some Sony/HTC Phones -->
+    <string name="videoHdrParam" translatable="false">video-hdr</string>
 </resources>
