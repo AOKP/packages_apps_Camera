@@ -2425,40 +2425,8 @@ public class PhotoModule
         setCameraParameters(UPDATE_PARAM_ALL);
 
         if (ApiHelper.HAS_SURFACE_TEXTURE) {
-            CameraScreenNail screenNail = (CameraScreenNail) mActivity.mCameraScreenNail;
-            if (Util.enableAspectRatioFixes()) {
-                int oldWidth = screenNail.getTextureWidth();
-                int oldHeight = screenNail.getTextureHeight();
-                Size size = mParameters.getPreviewSize();
-                int previewWidth = size.width;
-                int previewHeight = size.height;
-                if (mCameraDisplayOrientation % 180 != 0) {
-                   previewWidth = size.height;
-                   previewHeight = size.width;
-                }
-                if ( ( mSurfaceTexture == null ) ||
-                      (previewWidth != oldWidth) ||
-                      (previewHeight != oldHeight) ) {
-                    screenNail.setSize(previewWidth, previewHeight);
-                    screenNail.enableAspectRatioClamping();
-                    mActivity.notifyScreenNailChanged();
-                    screenNail.acquireSurfaceTexture();
-                    mSurfaceTexture = screenNail.getSurfaceTexture();
-                }
-            } else {
-                if (mSurfaceTexture == null) {
-                    Size size = mParameters.getPreviewSize();
-                    if (mCameraDisplayOrientation % 180 == 0) {
-                        screenNail.setSize(size.width, size.height);
-                    } else {
-                        screenNail.setSize(size.height, size.width);
-                    }
-                    screenNail.enableAspectRatioClamping();
-                    mActivity.notifyScreenNailChanged();
-                    screenNail.acquireSurfaceTexture();
-                    mSurfaceTexture = screenNail.getSurfaceTexture();
-                }
-            }
+            mSurfaceTexture = Util.refreshSurface(
+                    mCameraDisplayOrientation,mParameters, mActivity); 
             mCameraDevice.setDisplayOrientation(mCameraDisplayOrientation);
             mCameraDevice.setPreviewTextureAsync((SurfaceTexture) mSurfaceTexture);
         } else {
