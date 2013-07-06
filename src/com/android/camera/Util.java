@@ -31,6 +31,7 @@ import android.graphics.Matrix;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.Parameters;
@@ -187,6 +188,7 @@ public class Util {
     private static boolean mIsCountDownOn;
     private static AudioManager mAudioManager;
     private static boolean mIsMuted = false;
+    public static Object mSurfaceTexture;
 
     private Util() {
     }
@@ -295,6 +297,46 @@ public class Util {
 
     public static boolean enableAspectRatioFixes() {
         return sEnableAspectRatioFixes;
+    }
+
+    public static SurfaceTexture refreshSurface(int mCameraDisplayOrientation,
+            Parameters mParameters, CameraActivity mActivity) {
+        CameraScreenNail screenNail = (CameraScreenNail) mActivity.mCameraScreenNail;
+        if (enableAspectRatioFixes()) {
+            int oldWidth = screenNail.getTextureWidth();
+            int oldHeight = screenNail.getTextureHeight();
+            Size size = mParameters.getPreviewSize();
+            int previewWidth = size.width;
+            int previewHeight = size.height;
+            if (mCameraDisplayOrientation % 180 != 0) {
+                previewWidth = size.height;
+                previewHeight = size.width;
+            }
+            if (( mSurfaceTexture == null ) ||
+                (previewWidth != oldWidth) ||
+                (previewHeight != oldHeight) ||
+                (Util.enableAspectRatioFixes())) {
+                screenNail.setSize(previewWidth, previewHeight);
+                screenNail.enableAspectRatioClamping();
+                mActivity.notifyScreenNailChanged();
+                screenNail.acquireSurfaceTexture();
+                mSurfaceTexture = screenNail.getSurfaceTexture();
+            }
+        } else {
+            if (mSurfaceTexture == null) {
+                Size size = mParameters.getPreviewSize();
+                if (mCameraDisplayOrientation % 180 == 0) {
+                    screenNail.setSize(size.width, size.height);
+                } else {
+                    screenNail.setSize(size.height, size.width);
+                }
+                screenNail.enableAspectRatioClamping();
+                mActivity.notifyScreenNailChanged();
+                screenNail.acquireSurfaceTexture();
+                mSurfaceTexture = screenNail.getSurfaceTexture();
+            }
+        }
+        return (SurfaceTexture)mSurfaceTexture;
     }
 
     public static void enableSpeechRecognition(boolean enable, PhotoModule module) {
