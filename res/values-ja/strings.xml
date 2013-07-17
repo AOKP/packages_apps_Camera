@@ -51,19 +51,27 @@
     <string name="pref_camera_picturesize_entry_11_5mp">11.5Mピクセル</string>
     <string name="pref_camera_picturesize_entry_9mp">9Mピクセル</string>
     <string name="pref_camera_picturesize_entry_8mp" msgid="259953780932849079">"8Mピクセル"</string>
+    <string name="pref_camera_picturesize_entry_7mp">7Mピクセル</string>
     <string name="pref_camera_picturesize_entry_6_4mp">6.4Mピクセル</string>
+    <string name="pref_camera_picturesize_entry_6mp">6Mピクセル</string>
     <string name="pref_camera_picturesize_entry_5mp" msgid="2882928212030661159">"5Mピクセル"</string>
+    <string name="pref_camera_picturesize_entry_4_5mp">4.5Mピクセル</string>
     <string name="pref_camera_picturesize_entry_4mp">4Mピクセル</string>
+    <string name="pref_camera_picturesize_entry_3_7mp">3.7Mピクセル</string>
     <string name="pref_camera_picturesize_entry_3mp" msgid="741415860337400696">"3Mピクセル"</string>
     <string name="pref_camera_picturesize_entry_2_5mp">2.5Mピクセル</string>
+    <string name="pref_camera_picturesize_entry_2_4mp">2.4Mピクセル</string>
     <string name="pref_camera_picturesize_entry_2_1mp">2.1Mピクセル</string>
     <string name="pref_camera_picturesize_entry_2mp" msgid="1753709802245460393">"2Mピクセル"</string>
+    <string name="pref_camera_picturesize_entry_1_9mp">1.9Mピクセル</string>
     <string name="pref_camera_picturesize_entry_1_5mp">1.5Mピクセル</string>
     <string name="pref_camera_picturesize_entry_1_3mp" msgid="829109608140747258">"1.3Mピクセル"</string>
     <string name="pref_camera_picturesize_entry_1mp" msgid="1669725616780375066">"1Mピクセル"</string>
+    <string name="pref_camera_picturesize_entry_wxga">WXGA</string>
     <string name="pref_camera_picturesize_entry_xga">XGA</string>
     <string name="pref_camera_picturesize_entry_svga">SVGA</string>
     <string name="pref_camera_picturesize_entry_wvga">WVGA</string>
+    <string name="pref_camera_picturesize_entry_wqvga">WQVGA</string>
     <string name="pref_camera_picturesize_entry_vga" msgid="806934254162981919">"VGA"</string>
     <string name="pref_camera_picturesize_entry_qvga" msgid="8576186463069770133">"QVGA"</string>
     <string name="pref_camera_focusmode_title" msgid="2877248921829329127">"フォーカスモード"</string>
@@ -241,14 +249,9 @@
      <!-- Settings screen, ISO dialog radio button choices -->
      <string name="pref_camera_iso_entry_auto">自動</string>
      <string name="pref_camera_iso_entry_isodeblur">自動 (HJR)</string>
-     <string name="pref_camera_iso_entry_iso1600">1600</string>
-     <string name="pref_camera_iso_entry_iso1200">1200</string>
-     <string name="pref_camera_iso_entry_iso1000">1000</string>
-     <string name="pref_camera_iso_entry_iso800">800</string>
-     <string name="pref_camera_iso_entry_iso400">400</string>
-     <string name="pref_camera_iso_entry_iso200">200</string>
-     <string name="pref_camera_iso_entry_iso100">100</string>
-     <string name="pref_camera_iso_entry_iso50">50</string>
+     <string name="pref_camera_iso_entry_isosports">スポーツ</string>
+     <string name="pref_camera_iso_entry_isonight">夜景</string>
+     <string name="pref_camera_iso_entry_isomovie">映画</string>
 
     <!-- Settings screen, JPEG Quality -->
     <string name="pref_camera_jpeg_title">JPEG品質</string>
@@ -317,5 +320,6 @@
 
     <!-- Persistent remote shutter -->
     <string name="pref_nohands_persistent_title">ハンズフリー継続</string>
+    <string name="pref_video_hdr">HDR</string>
 
 </resources>
