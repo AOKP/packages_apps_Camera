@@ -32,7 +32,6 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
-import android.graphics.SurfaceTexture;
 import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.Parameters;
 import android.hardware.Camera.PictureCallback;
@@ -948,14 +947,8 @@ public class VideoModule implements CameraModule,
         try {
             if (!effectsActive()) {
                 if (ApiHelper.HAS_SURFACE_TEXTURE) {
-                    SurfaceTexture surfaceTexture = null;
-
-                    if (Util.enableAspectRatioFixes()) {
-                        surfaceTexture = Util.refreshSurface(mCameraDisplayOrientation, mParameters, mActivity);
-                    } else {
-                        surfaceTexture = ((CameraScreenNail) mActivity.mCameraScreenNail).getSurfaceTexture();
-                    }
-                    mActivity.mCameraDevice.setPreviewTextureAsync(surfaceTexture);
+                    mActivity.mCameraDevice.setPreviewTextureAsync(
+                            ((CameraScreenNail) mActivity.mCameraScreenNail).getSurfaceTexture());
                 } else {
                     mActivity.mCameraDevice.setPreviewDisplayAsync(mPreviewSurfaceView.getHolder());
                 }
